@@ -38,7 +38,7 @@ build web site:
 img-tree-02.py   list image files    param: [dir, output file: img-?.csv]
 img-html-100.py      write unitegallery html files  
                      param:[input file: img-?.csv, output file: img-html-?.html template:img-html-100-?.html]
-img-html-gg.py   write gammagallery htmls
+img-html-gg-05.py   write gammagallery htmls
                   param:[input file: img-?.csv, output file:img-html-gg-?.html
                    template gg-?.html]
 dir-img.py       param: [rootdir: .\images, output file: flist?.txt]

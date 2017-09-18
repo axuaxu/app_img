@@ -11,6 +11,7 @@ mark = htmlstr.find(sgg)+tlen
 instr = ""
 outstr = ""
 #read  template file
+painterarr=[]
 i = 0
 for line in fin:
   if i < 20:
@@ -20,6 +21,7 @@ for line in fin:
 	#print len(narr)
      if  len(narr)>3:
          painter = narr[2]
+         painterarr.append(painter)
          name = painter.split('-')
          lastname = name[-1]
          fullname = painter.replace('-','')
@@ -76,6 +78,7 @@ mark2 = outstr.find(sgg2)+tlen2
 outstr = outstr[:mark2]+instr+outstr[mark2:]
 fout.write(outstr)
 
+print(list(set(painterarr)))
 
 
          #<img alt="Image 2 Title" 
