@@ -1,0 +1,413 @@
+jQuery(document).ready(function() {
+	jQuery(document.body).removeClass('preload')
+
+	function attrSupported(element, attribute) {
+		var test = document.createElement(element);
+		if(attribute in test) return true;
+			else return false;
+	}
+
+	if (!attrSupported("input", "placeholder") || !attrSupported("textarea", "placeholder")) {
+		jQuery('input[placeholder], textarea[placeholder]').each(function(elem, index) {
+			var placeholderText = elem.attr('placeholder');
+			if(elem.attr('value') == '') elem.attr('value', placeholderText);
+
+      elem.on('focus', function() { if(this.attr('value') == placeholderText) this.attr('value', ''); });
+      elem.on('blur', function() { if(this.attr('value') == '') this.attr('value', placeholderText); });
+		});
+
+		jQuery('form').each(function(elem, index) {
+			elem.on('submit', function(evt) {
+				var elemWithPlaceholder = elem.getElements("input[placeholder], textarea[placeholder]");
+
+				elemWithPlaceholder.each(function(elem, index) {
+					if(elem.get('value') == elem.get('placeholder')) elem.set('value', '');
+				});
+			});
+		});
+	}
+
+	// off-canvas nav
+	jQuery('.nav-toggle').on('click', function() { 
+		jQuery('.inner-wrap').stop().toggleClass('on');
+	});
+
+	// Account pages
+	jQuery('.account-subscribe').on('click', function() {
+		this.stop().toggleClass('subscribed');
+	});
+
+	/* Tour Page */
+	jQuery('.view-all-faq').on('click', function() {
+		jQuery('.faq').stop().toggleClass('show-all');
+	});
+});
+
+jQuery(document).ready(function($) {
+	
+	// Define "Mobile" browsers/agents
+	// --------------------------------------
+	var isMobile = {
+	  Android: function() {
+	    return navigator.userAgent.match(/Android/i);
+	  },
+	  BlackBerry: function() {
+	    return navigator.userAgent.match(/BlackBerry/i);
+	  },
+	  iOS: function() {
+	    return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	  },
+	  Opera: function() {
+	    return navigator.userAgent.match(/Opera Mini/i);
+	  },
+	  Windows: function() {
+	    return navigator.userAgent.match(/IEMobile/i);
+	  },
+	  any: function() {
+	    return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+	  }
+	};
+
+	// Remove elements on mobile
+	// --------------------------------------
+	if ( isMobile.any() ) {
+		var removeOnMobile = jQuery('.entry-content .broadcast.top, .entry-content .vd-deepcontent-300, .featherlight.popup-wrapper');
+		removeOnMobile.remove();
+
+		// show whatspp share link/button
+		jQuery('.share-link.fa.fa-whatsapp').show();
+	}	
+
+	// sidebar floating ad zone
+	// --------------------------------------	
+	var StickyElement = function(node){
+	  var doc = jQuery(document), 
+	      fixed = false,
+	      anchor = node.find('.sticky-anchor'),
+	      content = node.find('.sticky-content');
+	  
+	  var onScroll = function(e){
+	    var docTop = doc.scrollTop(),
+	        anchorTop = anchor.offset().top - 100;
+	    
+	    // console.log('scroll', docTop, anchorTop);
+	    if(docTop > anchorTop){
+	      if(!fixed){
+	        anchor.height(content.outerHeight());
+	        content.addClass('fixed');        
+	        fixed = true;
+	      }
+	    }  else   {
+	      if(fixed){
+	        anchor.height(0);
+	        content.removeClass('fixed'); 
+	        fixed = false;
+	      }
+	    }
+	  };
+	  
+	  jQuery(window).on('scroll', onScroll);
+	};
+
+	if ( jQuery('#sticky').length ) {
+		var floatingAdzone = new StickyElement(jQuery('#sticky'));
+	}
+
+
+
+	// Entry/single page social share
+	// --------------------------------------
+	var windowSizeArray = [ "width=550,height=450",
+                          "width=300,height=400,scrollbars=yes" ];
+	jQuery(document).on('click', '.entry-share-links li a:not(.entry-share-links li.shareon-sharethis a),.shareon-facebook,.shareon-twitter, .entry-share .share-link:not(.fa-whatsapp), .freebie-social-share a', function(event) {                          
+	// $('.entry-share-links li a:not(.entry-share-links li.shareon-sharethis a),.shareon-facebook,.shareon-twitter, .entry-share .share-link:not(.fa-whatsapp), .freebie-social-share a').click(function (event){
+
+	    var url = jQuery(this).attr("href");
+	    var windowName = "Vandelay Design - Share";
+	    var windowSize = windowSizeArray[0];
+
+	    window.open(url, windowName, windowSize);
+
+	    event.preventDefault();
+
+	});
+	jQuery('.share-count').filter( function (index) {
+	    return $(this).text() == 0;
+	}).css('display', 'none');
+
+
+	// Footer Popup (Vandelay Premier)
+	// --------------------------------------
+	if( jQuery.cookie('hideFooterPopup') != '1' && ! jQuery('body').is('#pricing, #amember, .member-active') ) {
+		jQuery(function(){
+		    var hasBeenTrigged = false;
+		    jQuery(window).scroll(function() {
+		        if (jQuery(this).scrollTop() >= 500 && !hasBeenTrigged) { // if scroll is greater/equal than 500 and hasBeenTrigged is set to false.
+		            jQuery('.footer-popup').addClass('show-pop');
+		            // console.log ( 'you have scrolled more >= 500px');
+		            //ga('send', 'event', 'Premier popup', 'triggered');
+		            hasBeenTrigged = true;
+		        }
+		    });
+		});
+  } else {
+  	jQuery('.footer-popup').removeClass('show-pop').addClass('no-show');
+  }
+
+  if( jQuery.cookie('hideFooterPopupSanta') == '1') {
+  	jQuery('.footer-popup').removeClass('show-pop').addClass('no-show-secondary');
+  }
+
+	var popUpElements = jQuery('.footer-popup .popup-header, .footer-popup .popup-content, .footer-popup .popup-content .balloon, .footer-popup .popup-closure, .footer-popup');
+	jQuery('.footer-popup .popup-closure').on('click', function(e) {
+		jQuery(popUpElements).addClass('no-show');
+		jQuery.cookie('hideFooterPopup', '1', { expires: 365, path: '/' }); 
+		e.preventDefault();
+	});
+	jQuery('.footer-popup .btn-collapsed').on('click', function(e) {
+		jQuery(this).addClass("no-show");
+		jQuery(popUpElements).removeClass('no-show');
+		e.preventDefault();
+	});
+	jQuery('.footer-popup .btn-expanded').on('click', function(e) {
+		jQuery.cookie('hideFooterPopup', '1', { expires: 365, path: '/' }); 
+	});
+
+	// santa sleigh slideup banner
+	jQuery('.footer-popup .btn-collapsed').on('click', function(e) {
+		e.preventDefault();
+		jQuery('.footer-popup').addClass('show-pop').removeClass('no-show');
+		jQuery(popUpElements).removeClass('no-show');
+	});
+
+	jQuery('.popup-closure-secondary').on('click', function(e) {
+		jQuery('.footer-popup.coupon-santa-sleigh').addClass('no-show-secondary');
+		jQuery.cookie('hideFooterPopupSanta', '1', { expires: 7, path: '/' }); 
+	});
+
+
+	// Shop Pages lightbox
+	// --------------------------------------
+  jQuery('.show-product').on('click', function() {
+    var url      = jQuery(this).data('url');
+    load_product(url);
+  });
+
+	jQuery.fn.almComplete = function(alm){
+	  // re init after (Ajax Load More) plugin 
+	  // finishes ajax loading
+	  jQuery('.show-product').on('click', function() {
+	    var url      = jQuery(this).data('url');
+	    load_product(url);
+	    resizeColorBox();
+	  });    
+	} 
+  var load_product = function(url) {
+    jQuery.getJSON( url, function(data) {
+      var source   = jQuery("#product-template").html();
+      var template = Handlebars.compile(source);
+      var html    = template(data);
+      jQuery.colorbox({
+        width: 1140,
+        initialHeight: '96%',
+        innerHeight: '96%',
+        maxHeight: '96%',
+        fixed: true,
+        html: html,
+				onOpen:function(){ 
+					$('body').addClass('no-scroll');
+				},
+				onCleanup:function(){ 
+					$('body').removeClass('no-scroll');
+				}             
+      });
+			resizeColorBox();     
+    });
+  }
+
+
+
+	// removed deep content ad on autoresponder landing pages 
+	// this is also/first hidden with CSS
+	jQuery('body.page-template-autoresponder-landing-php .vd-deepcontent-300').remove();
+
+	// share block (on hover)
+	jQuery(".grid-item:not(.is--large) .article-shares").hover(function() {
+	  jQuery(this).closest('.grid-item').children('.share-block').addClass('is-visible');
+	}, function() {
+	  jQuery(this).closest('.grid-item').children('.share-block').removeClass('is-visible');
+	});
+	jQuery(".grid-item.is--large .article-shares").hover(function() {
+	  jQuery(this).next('.share-block').addClass('is-visible');
+	}, function() {
+	  jQuery(this).next('.share-block').removeClass('is-visible');
+	});
+	// simulate link + pop-under behavior
+	jQuery(".grid-item .grid-item--inner[data-sim-link]").on('click', function(e) {
+		if ( jQuery(this).attr('data-sim-aff-link') && jQuery.cookie($(this).parent('.grid-item').attr('id')) != '1' ) {
+	    window.open(jQuery(this).data('sim-link'), '_blank');
+	    window.open(jQuery(this).data('sim-aff-link'), '_top');
+	    // set cookie to value of parent div id and expire it after 1 day (sitewide)
+			jQuery.cookie($(this).parent('.grid-item').attr('id'), '1', { expires: 1, path: '/' });
+	  } else {
+	  	window.location.href = jQuery(this).data('sim-link');
+		}
+	});	
+	// links inside grid-item that has affiliate link
+	jQuery(".grid-item .grid-item--inner[data-sim-link][data-sim-aff-link] a").on('click', function(e) {
+		e.preventDefault();
+	});
+
+
+  // equal height columns/divs
+	jQuery("body.page-template-home-php .articles-grid .is--large > .grid-item--inner img").load(function() {  
+	  jQuery('body.page-template-home-php .articles-grid .is--large > .grid-item--inner').matchHeight();
+  });
+
+  // truncate long titles
+	jQuery(".grid-item.is--large .article-title > a").dotdotdot({
+		/*	The text to add as ellipsis. */
+		ellipsis	: '... ',
+ 
+		/*	How to cut off the text/html: 'word'/'letter'/'children' */
+		wrap		: 'letter',
+ 
+		/*	Wrap-option fallback to 'letter' for long words */
+		fallbackToLetter: true,
+ 
+		/*	jQuery-selector for the element to keep and put after the ellipsis. */
+		after		: null,
+ 
+		/*	Whether to update the ellipsis: true/'window' */
+		watch		: 'window',
+	
+		/*	Optionally set a max-height, if null, the height will be measured. */
+		height		: 100,
+ 
+		/*	Deviation for the height-option. */
+		tolerance	: 0,
+ 
+		/*	Callback function that is fired after the ellipsis is added,
+			receives two parameters: isTruncated(boolean), orgContent(string). */
+		callback	: function( isTruncated, orgContent ) {},
+ 
+		lastCharacter	: {
+ 
+			/*	Remove these characters from the end of the truncated text. */
+			remove		: [ ' ', ',', ';', '.', '!', '?' ],
+ 
+			/*	Don't add an ellipsis if this array contains 
+				the last character of the truncated text. */
+			noEllipsis	: []
+		}
+	});
+
+	// mini sidebar article title
+	jQuery(".blog-listing .articles-grid .grid-item.is--sidebar .grid-item--inner ul li .list-item--content .article-title").dotdotdot({
+		ellipsis	: '... ',
+		wrap			: 'letter',
+		height		: 38
+	});
+
+
+	// single share links
+jQuery(document).on('click', '.toggle-share-links', function() {	
+	// $(".toggle-share-links").on('click', function() {
+		jQuery(this).toggleClass('fa-plus fa-minus');
+		jQuery(this).prev('span').toggleClass('is-visible');
+	});	
+
+	// click to toggle search
+	jQuery('.search-icon').on('click', function() {
+		jQuery('.search-field').focus();
+	});
+	jQuery('.search-field').on('blur', function () {
+	  jQuery(this).closest('.search-wrapper').removeClass('in-view');
+	}).on('focus', function () {
+	  jQuery(this).closest('.search-wrapper').addClass('in-view');
+	});
+
+	// nav section hover
+	jQuery(".header-nav > ul > li").hoverIntent({    
+	  sensitivity: 1, // number = sensitivity threshold (must be 1 or higher)    
+	  interval: 10,  // number = milliseconds for onMouseOver polling interval    
+	  timeout: 300,   // number = milliseconds delay before onMouseOut    
+	  over:function(){
+	    jQuery(this).addClass("active");
+	    jQuery(this).children('.submenu').addClass('is-visible');
+
+			// imgs
+	    jQuery(".small-item-image__sub-nav").lazyload();
+	  },
+	  out: function(){
+	    jQuery(this).removeClass("active");
+	    jQuery(this).children('.submenu').removeClass('is-visible');
+	  }
+	});
+
+
+
+	// sub menu tab nav
+	jQuery(document).on('hover', '.submenu.full.is-visible .submenu-nav > li', function() {			
+	  if (!jQuery(this).hasClass("active")) {
+	    var tabNum = jQuery(this).index();
+	    var nthChild = tabNum+1;
+	    jQuery(".submenu.full.is-visible .submenu-nav > li.active").removeClass("active");
+	    jQuery(this).addClass("active");
+	    jQuery(".submenu.full.is-visible .submenu-posts > ul.active").removeClass("active");
+	    jQuery(".submenu.full.is-visible .submenu-posts > ul:nth-child("+nthChild+")").addClass("active");
+
+	    // imgs
+	    jQuery(".small-item-image__sub-nav").lazyload();
+	  }
+	});	
+
+
+
+	// scoot the header down so fancybar doesn't sit on top of it
+	setInterval(function() {
+		if ( jQuery('._fancybar').parent('div').hasClass('fancybar_show') ) {
+			if ( !jQuery('.masthead').hasClass('handledFancyBar') )  {
+				jQuery('.masthead').animate({top:'48'}, 570 );
+				jQuery('.masthead').addClass("handledFancyBar");
+			}
+    } else {
+      if ( jQuery('.masthead').hasClass('handledFancyBar') )  {
+	      jQuery('.masthead').animate({top:'0'}, 400 );
+	      jQuery('.masthead').removeClass('handledFancyBar');
+      }
+    }
+	}, 0);
+
+
+	// Track sidebarlinks (Mixpanel)
+	mixpanel.track_links(".rightcol .sidebar-list a", "Click Sidebar Link", {
+		"referrer": document.referrer
+	});	
+
+
+});
+
+// scroll depth (single page)
+// --------------------------------------
+jQuery(function() {
+  jQuery.scrollDepth();
+});
+
+// Colorbox resize function
+var resizeTimer;
+function resizeColorBox() {
+     if (resizeTimer) clearTimeout(resizeTimer);
+     resizeTimer = setTimeout(function() {
+              if (jQuery('#cboxOverlay').is(':visible')) {
+                      jQuery.colorbox.resize({ height:'96%', }); 
+              }
+						  if ( jQuery(window).width() < 1140 ) {
+						  	jQuery.colorbox.resize({ height: '96%', width:'96%'}); 
+							}                            
+     }, 0)
+}
+// Resize Colorbox when resizing window 
+// or changing mobile device orientation
+jQuery(window).resize(resizeColorBox);
+window.addEventListener("orientationchange", resizeColorBox, false);

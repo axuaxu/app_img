@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://s0.2mdn.net/2987979/1504810704307/bell_cloud_campaign_fr_300x250/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<!---------------------------------------->
+	<title>Bell</title>
+	<!---------------------------------------->
+	<meta name="ad.size" content="width=300,height=250">
+	<!---------------------------------------->
+	<link rel="stylesheet" href="./style.css">
+	<!---------------------------------------->
+	<script>
+		var clickTag = "https://www.google.com";
+		var ads = 'standard' // studio | sizmek | standard
+	</script>
+
+	<!-- STUDIO -->
+	<!-- <script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script> -->
+	<script src="./tweenmax_1.19.0_643d6911392a3398cb1607993edabfa7_min.js.download"></script>
+
+	<!--  -->
+	<script src="./cb_core.js.download"></script>
+	<!--  -->
+<script type="text/javascript">
+    
+      (function() {
+        var relegateNavigation = '';
+        var handleClickTagMessage = function(e) {
+          try {
+            var eventData = JSON.parse(e.data);
+          } catch (err) {
+            return;
+          }
+          if (eventData.isInitClickTag) {
+            if (eventData.clickTags) {
+              for (var i = 0; i < eventData.clickTags.length; i++) {
+                var clkTag = eventData.clickTags[i];
+                window[clkTag.name] = clkTag.url;
+              }
+            } else if (eventData.clickTag) {
+              window.clickTag = eventData.clickTag;
+            }
+            relegateNavigation = eventData.relegateNavigation;
+          }
+        };
+
+        if (open.call) {
+          window.open = function(open) {
+            return function(url, name, features) {
+              if (relegateNavigation === 'parent') {
+                var message = {'clickTag': url, 'isPostClickTag': true};
+                parent.postMessage(JSON.stringify(message), '*');
+              } else {
+                var args = [url, name];
+                if (features) {
+                  args.push(features);
+                }
+                open.apply(window, args);
+              }
+            };
+          }(window.open);
+        }
+
+        if (window.addEventListener) {
+          window.addEventListener(
+              'message', handleClickTagMessage, false);
+        } else {
+          window.attachEvent('onmessage', handleClickTagMessage);
+        }
+      })();
+    
+  </script></head>
+
+<body>
+	<div id="container" style="display: block;">
+
+		<img id="bellement" src="./bellement.jpg" alt="Bell" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); opacity: 1;">
+		<img id="logo" src="./logo.png" alt="Bell" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
+
+		<div id="text">
+			<img id="copy1" src="./copy1.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, -10, 0, 1); opacity: 0;">
+			<img id="copy2" src="./copy2.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 8.49918, 0, 1); opacity: 0.150082;">
+			<!-- <img id="link" src="./link.png" alt="" /> -->
+			<img id="copy3" src="./copy3.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); opacity: 0;">
+			<img id="copy4" src="./copy4.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); opacity: 0;">
+			<img id="copy5" src="./copy5.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); opacity: 0;">
+			<img id="copy6" src="./copy6.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1); opacity: 0;">
+		</div>
+
+		<div id="cta" style="opacity: 0;">
+			<img src="./cta-over.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
+			<img class="over" src="./cta.png" alt="" style="transform: matrix3d(1, 1.74533e-05, 0, 0, -1.74533e-05, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);">
+		</div>
+
+		<div class="bg"></div>
+	</div>
+
+	<script type="text/javascript" src="./main.js(1).download"></script>
+
+
+
+
+</body></html>

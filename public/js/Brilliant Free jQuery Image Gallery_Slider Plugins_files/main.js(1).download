@@ -1,0 +1,70 @@
+var tl = new TimelineMax();
+function initAd() {
+    //--------- PRE-LOAD IMAGE ------------
+    startPreload('copy1.png','bellement.jpg', 'logo.png', startAnim);
+    //-------------------------------------
+    function startAnim() {
+        //--------------- SET -----------------
+        tl.set('#container', {display: 'block'});
+        tl.set(['img'], {rotation: 0.001, force3D: true})
+        //------------ ADD EVENT --------------
+        addEvent();
+        //---------- ADD ANIMATION ------------
+        tl
+            .from("#bellement", 	.75,	{scale:"1.3", alpha:0, transformOrigin:"bottom left", ease:Strong.easeOut}, "0.1")
+            .from("#copy1", 	1,	{opacity:0, y:"+=10", ease:Strong.easeOut}, "0.4")
+            .to("#copy1", 	1,	{opacity:0, y:"-=10", ease:Strong.easeIn}, "2.4")
+
+            .from("#copy2", 	1,	{opacity:0, y:"+=10", ease:Strong.easeOut}, "3.4")
+            .to("#copy2", 	1,	{opacity:0, y:"-=10", ease:Strong.easeIn}, "5.4")
+            //.from("#link", 	1,	{opacity:0, x:"-=10", ease:Strong.easeOut}, "3.4")
+            //.to("#link", 	1,	{opacity:0, x:"+=10", ease:Strong.easeIn}, "5.4")
+
+            .from("#copy3", 	1,	{opacity:0, y:"+=10", ease:Strong.easeOut}, "6.4")
+            .to("#copy3", 	1,	{opacity:0, y:"-=10", ease:Strong.easeIn}, "8.4")
+
+            .from("#copy4", 	1,	{opacity:0, y:"+=10", ease:Strong.easeOut}, "9.4")
+            .to("#copy4", 	1,	{opacity:0, y:"-=10", ease:Strong.easeIn}, "11.4")
+
+            .from("#copy5", 	1,	{opacity:0, y:"+=10", ease:Strong.easeOut}, "12.4")
+            .to("#copy5", 	1,	{opacity:0, y:"-=10", ease:Strong.easeIn}, "15")
+
+            .from("#copy6", 	1,	{opacity:0, y:"+=10", ease:Strong.easeOut}, "16")
+            .from("#cta", 	1,	{opacity:0, ease:Strong.easeIn}, "17")
+
+
+        //-------------------------------------
+
+
+        //-------------------------------------
+    };
+
+    function addEvent() {
+        //--------------- SET -----------------
+        //To add:		_(object).on(events,  function);
+        //To remove:	_(object).off(events, function);
+        //-------------------------------------
+        _('.bg').on('click', exit);
+        _('.bg').on('mouseover', hoverAnim);
+        _('.bg').on('mouseout', hoverAnimOut);
+    };
+
+    function exit() {
+        console.log('CLICKED');
+        switch(ads) {
+            case 'sizmek': 		EB.clickthrough("myClickInteraction"); console.log('sizmek'); break;
+            case 'studio': 		Enabler.exit('Background Exit'); console.log('studio'); break;
+            case 'standard':	window.open(clickTag); console.log('standard'); break;
+            default: 			window.open(clickTag); console.log('standard'); break;
+        }
+
+    }
+
+    function hoverAnim(){
+        TweenMax.to('.over',0.5,	{alpha:0});
+    }
+    function hoverAnimOut(){
+        TweenMax.to('.over',0.5,	{alpha:1});
+    }
+
+};

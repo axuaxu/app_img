@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)https://s0.2mdn.net/3237672/1503089666060/FR_300x250_VirginMobileLightsOn.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+         <meta name="ad.size" content="width=300,height=250">
+        <title>Virgin</title>
+        <link type="text/css" rel="stylesheet" href="./styles.css">
+    <script type="text/javascript">
+    
+      (function() {
+        var relegateNavigation = '';
+        var handleClickTagMessage = function(e) {
+          try {
+            var eventData = JSON.parse(e.data);
+          } catch (err) {
+            return;
+          }
+          if (eventData.isInitClickTag) {
+            if (eventData.clickTags) {
+              for (var i = 0; i < eventData.clickTags.length; i++) {
+                var clkTag = eventData.clickTags[i];
+                window[clkTag.name] = clkTag.url;
+              }
+            } else if (eventData.clickTag) {
+              window.clickTag = eventData.clickTag;
+            }
+            relegateNavigation = eventData.relegateNavigation;
+          }
+        };
+
+        if (open.call) {
+          window.open = function(open) {
+            return function(url, name, features) {
+              if (relegateNavigation === 'parent') {
+                var message = {'clickTag': url, 'isPostClickTag': true};
+                parent.postMessage(JSON.stringify(message), '*');
+              } else {
+                var args = [url, name];
+                if (features) {
+                  args.push(features);
+                }
+                open.apply(window, args);
+              }
+            };
+          }(window.open);
+        }
+
+        if (window.addEventListener) {
+          window.addEventListener(
+              'message', handleClickTagMessage, false);
+        } else {
+          window.attachEvent('onmessage', handleClickTagMessage);
+        }
+      })();
+    
+  </script></head>
+     
+    <body>
+        <div id="banner" style="opacity: 1;">
+            <div id="background2"></div>
+            <div id="background"></div>
+            <div id="copy1" style="transform: matrix(1, 0, 0, 1, 300, 0);"></div>
+            <div id="copy1a" style="transform: matrix(1, 0, 0, 1, 300, 0);"></div>
+            <div id="copy2"></div>
+            <div id="copy3"></div>
+            <div id="copy3a"></div>
+            <div id="modem" style="transform: matrix(1, 0, 0, 1, 0, 250);"></div>
+            <div id="cta" style="opacity: 0; transform: matrix(0.3, 0, 0, 0.3, 0, 0);"></div>
+            <div id="logo"></div>
+            <div id="keyline"></div>
+        </div>
+        
+        <script type="text/javascript">
+             var clickTag = "";
+             var clickArea = document.getElementById('banner');
+
+                 clickArea.onclick = function () {
+                     window.open(clickTag, "_blank");
+                      }
+       	 </script>
+         
+         <script src="./tweenmax_1.19.0_643d6911392a3398cb1607993edabfa7_min.js.download"></script>
+       	 <script type="text/javascript" src="./main.js(2).download"></script>
+         
+    
+</body></html>

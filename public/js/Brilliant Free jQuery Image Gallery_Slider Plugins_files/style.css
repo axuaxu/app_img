@@ -1,0 +1,33 @@
+body {
+    margin: 0px;
+}
+
+#container {
+    background-color: #fff;
+    border: 1px solid lightgray;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    width: 300px;
+    height: 250px;
+}
+
+#container * {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    width: 100%;
+}
+
+#stylus {
+    width: 8px;
+    height: 143px;
+    left: 117px;
+    top: 77px;
+}

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)http://unitegallery.net/index.php?page=documentation#using_the_api -->
+<html style="" class=" js no-touch csstransforms3d csstransitions webkit chrome win js"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		
+		<title>Unite Gallery - Documentation</title>		
+		<meta name="keywords" content="Unite Gallery">
+		<meta name="description" content="Unite Gallery - touch enabled reponsive image and video web gallery width zoom effect">
+		<meta name="author" content="Valiano">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link href="./Unite Gallery - Documentation_files/css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/bootstrap.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/font-awesome.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/theme.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/theme-elements.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/theme-animate.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/theme-responsive.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/default.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/custom.css">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/prism.css">
+
+		<!-- Head Libs -->
+		<script async="" src="./Unite Gallery - Documentation_files/analytics.js.download"></script><script src="./Unite Gallery - Documentation_files/modernizr.js.download"></script>
+
+		<!--[if IE]>
+			<link rel="stylesheet" href="css/ie.css">
+		<![endif]-->
+
+		<!--[if lte IE 8]>
+			<script src="vendor/respond.js"></script>
+		<![endif]-->
+
+		<!-- 
+		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>	
+		 -->
+		
+		<script type="text/javascript" src="./Unite Gallery - Documentation_files/jquery-11.0.min.js.download"></script>
+		<script src="./Unite Gallery - Documentation_files/bootstrap.js.download"></script>
+		<script src="./Unite Gallery - Documentation_files/prism.js.download"></script>
+		<script src="./Unite Gallery - Documentation_files/theme.plugins.js.download"></script>
+		<script src="./Unite Gallery - Documentation_files/theme.js.download"></script>
+		<script src="./Unite Gallery - Documentation_files/custom.js.download"></script>
+		
+				<!-- documenter -->
+		
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/documenter_style.css" media="all">
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/prettify.css" media="screen">
+		<script src="./Unite Gallery - Documentation_files/prettify.js.download"></script>
+		<script src="./Unite Gallery - Documentation_files/jquery.scrollTo.js.download"></script>
+		<script src="./Unite Gallery - Documentation_files/jquery.easing.js.download"></script>
+		<script>document.createElement('section');var duration='500',easing='swing';</script>
+		<script src="./Unite Gallery - Documentation_files/script.js.download"></script>
+
+	<style>
+		
+		#documenter_sidebar #documenter_logo{background-image:url(assets/images/image_2.png);}
+		.btn {
+			border-radius:3px;
+		}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: -ms-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: -webkit-gradient(linear, 0 0, 0 0088CC%, from(#DDDDDD), to(#0044CC));
+			  background-image: -webkit-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: -o-linear-gradient(top, #0088CC, #0044CC);
+			  background-image: linear-gradient(top, #0088CC, #0044CC);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088CC', endColorstr='#0044CC', GradientType=0);
+			  border-color: #0044CC #0044CC #bfbfbf;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  border-color: #0088CC #0088CC #bfbfbf;
+		  background-color: #0044CC;
+		}
+		hr{border-top:1px solid #EBEBEB;border-bottom:1px solid #FFFFFF;}
+	</style>
+		
+		<!-- documenter end -->
+				
+		<!-- Include Unite Gallery -->
+		<script type="text/javascript" src="./Unite Gallery - Documentation_files/unitegallery.min.js.download"></script>		
+		<link rel="stylesheet" href="./Unite Gallery - Documentation_files/unite-gallery.css" type="text/css">	
+				
+				
+	</head>
+	<body class="language-javascript" style="">
+
+		<div class="body">
+			<header id="header">
+				<div class="container">
+					<h1 class="logo">
+						<a href="http://unitegallery.net/index.php">
+							<img alt="Unite Gallery" width="143" height="69" data-sticky-width="129" data-sticky-height="62" src="./Unite Gallery - Documentation_files/logo_top.png">
+						</a>
+					</h1>
+					
+					
+					<div id="nav-links">
+						
+						<span class="nav-links-before">
+							Also available for:
+						</span>
+						
+						<nav>
+						<ul id="nav-links-menu" class="nav nav-pills nav-top nav-main">
+							<li class="dropdown">
+								<a href="http://wp.unitegallery.net/" class="dropdown-toggle" target="_blank">WordPress</a>
+ 								<ul class="dropdown-menu"> 				
+	 								<li><a href="http://wp.unitegallery.net/" target="_blank">Preview Demo</a></li>
+									<li><a href="http://codecanyon.net/item/unite-gallery-wordpress-plugin/10458750?ref=valiano" target="_blank">Buy Now</a></li>
+			 					</ul>
+							</li>
+							<li class="dropdown">
+								<a href="http://unitecms.net/premium-extensions/unite-gallery-main/default-theme" class="dropdown-toggle" target="_blank">Joomla!</a>
+ 								<ul class="dropdown-menu">
+	 								<li><a href="http://unitecms.net/premium-extensions/unite-gallery-main/default-theme" target="_blank">Preview Demo</a></li>
+									<li><a href="http://unitecms.net/cart?productid=29" target="_blank">Buy Now</a></li>
+			 					</ul>
+							</li>							
+							<li class="dropdown">
+								<a href="http://ps.unitegallery.net/content/6-ug-default-theme" target="_blank" class="dropdown-toggle">PrestaShop</a>
+ 								<ul class="dropdown-menu"> 				
+	 								<li><a href="http://ps.unitegallery.net/content/6-ug-default-theme" target="_blank">Preview Demo</a></li>
+									<li><a href="http://codecanyon.net/item/unite-gallery-prestashop-module/9871980?ref=valiano" target="_blank">Buy Now</a></li>
+			 					</ul>
+							</li>						
+							<li class="dropdown">
+								<a href="http://oc.unitegallery.net/index.php?route=information/information&amp;information_id=7" target="_blank" class="dropdown-toggle">OpenCart</a>
+ 								<ul class="dropdown-menu">
+	 								<li><a href="http://oc.unitegallery.net/index.php?route=information/information&amp;information_id=7" target="_blank">Preview Demo</a></li>			
+	 								<li><a href="http://codecanyon.net/item/unite-gallery-opencart-module/9904479?ref=valiano" target="_blank">Buy Now</a></li>			
+			 					</ul>									
+							</li>
+							<li class="dropdown">
+								<a href="http://oc.unitegallery.net/index.php?route=information/information&amp;information_id=7" target="_blank" class="dropdown-toggle">Drupal</a>
+ 								<ul class="dropdown-menu">
+	 								<li><a href="http://drupal.unitegallery.net/" target="_blank">Preview Demo</a></li>			
+	 								<li><a href="http://codecanyon.net/item/unite-gallery-drupal-module/11560330?ref=valiano" target="_blank">Buy Now</a></li>			
+			 					</ul>									
+							</li>
+							<li class="dropdown">
+								<a href="http://oc.unitegallery.net/index.php?route=information/information&amp;information_id=7" target="_blank" class="dropdown-toggle">PHP CMS</a>
+ 								<ul class="dropdown-menu">
+	 								<li><a href="http://cms.unitegallery.net/" target="_blank">Preview Demo</a></li>			
+	 								<li><a href="http://codecanyon.net/item/unite-gallery-with-php-admin/12506226?ref=valiano" target="_blank">Buy Now</a></li>			
+			 					</ul>
+							</li>
+							
+						</ul>
+						</nav>
+					</div>
+					
+					<nav>
+					
+												<ul class="nav nav-pills nav-top">
+							<li class="top_active">
+								<a href="http://unitegallery.net/index.php?page=documentation">DOCUMENTATION</a>
+							</li>
+							<li>
+								<a href="https://github.com/vvvmax/unitegallery/" target="_blank">GITHUB</a>
+							</li>														
+							<li>
+								<a id="link_download" href="https://github.com/vvvmax/unitegallery/archive/master.zip">DOWNLOAD</a>
+							</li>							
+						</ul>
+					
+					</nav>
+					<button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+						<i class="icon icon-bars"></i>
+					</button>
+				</div>
+				
+	
+	<div id="documenter_sidebar">
+		<ul id="documenter_nav">
+			<li><a class="" data-section="documenter_cover" href="javascript:void(0)">Start</a></li>				
+			<li><a href="javascript:void(0)" data-section="licence" title="Licence" class="">Licence</a></li>
+			<li><a href="javascript:void(0)" data-section="gallery_structure" title="Gallery Structure" class="">Changing Theme</a></li>
+			<li><a href="javascript:void(0)" data-section="installing_the_gallery" title="Installing The Gallery" class="">Installing The Gallery</a></li>
+			<li><a href="javascript:void(0)" data-section="changing_skin" title="Changing Skin" class="">Changing Skin</a></li>
+			<li><a href="javascript:void(0)" data-section="changing_theme" title="Changing Theme" class="">Changing Theme</a></li>
+			<li><a href="javascript:void(0)" data-section="using_the_api" title="Using The API" class="">Using The API</a></li>
+		</ul>
+		<div id="documenter_copyright">Copyright valiano 2014<br>
+		made with the <a href="http://rxa.li/documenter">Documenter v2.0</a> 
+		</div>
+	</div>
+	
+
+				<div class="navbar-collapse nav-main-collapse collapse">
+					
+					<!-- class="container" -->
+					
+					<div>
+						<nav class="nav-main mega-menu">
+							
+									
+			<ul class="nav nav-pills nav-main" id="mainMenu">
+							<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=tiles-columns">
+							Tiles - Columns							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=tiles-columns">Tiles - Columns - Default</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-columns-links">Tiles - Columns - With Links</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-columns-video">Tiles - Columns - Video Items</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-columns-variuos">Tiles - Columns - Various Examples</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-columns-options">Tiles - Columns - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=tiles-justified">
+							Tiles - Justified							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=tiles-justified">Tiles - Justified - Default</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-justified-links">Tiles - Justified - With Links</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-justified-various">Tiles - Justified - Various Examples</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-justified-options">Tiles - Justified - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=tiles-nested">
+							Tiles - Nested							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=tiles-nested">Tiles - Nested - Default</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-nested-size">Tiles - Nested - Another Size</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tiles-nested-options">Tiles - Nested - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=tilesgrid">
+							Tiles Grid							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=tilesgrid">Tiles Grid - Default</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tilesgrid-arrows">Tiles Grid - Navigation Arrows</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tilesgrid-video">Tiles Grid - Video Items</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tilesgrid-variuos">Tiles Grid - Various Examples</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=tilesgrid-options">Tiles Grid - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=carousel">
+							Carousel							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=carousel">Carousel - Default</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=carousel-video">Carousel - Video Items</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=carousel-another-video">Carousel - Another Video Items</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=carousel-various">Carousel - Various Examples</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=carousel-options">Carousel - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=default">
+							Default Theme							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=default">Default Theme - Default</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=default-notext">Default Theme - No Textpanel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=default-variuos">Default Theme - Variuos Examples</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=default-options">Default Theme - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=compact-bottom">
+							Compact Theme							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=compact-bottom">Compact Theme - Bottom Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=compact-top">Compact Theme - Top Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=compact-right">Compact Theme - Right Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=compact-left">Compact Theme - Left Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=compact-variuos">Compact Theme - Variuos Examples</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=compact-options">Compact Theme - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=grid-right">
+							Grid Theme							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=grid-right">Grid Theme - Right Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=grid-left">Grid Theme - Left Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=grid-bottom">Grid Theme - Bottom Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=grid-top">Grid Theme - Top Panel</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=grid-horizontal">Grid Theme - Horizontal Navigation</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=grid-various">Grid Theme - Variuos Examples</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=grid-options">Grid Theme - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=slider-example">
+							Slider							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=slider-example">Slider Theme - Example</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=slider-video">Slider Theme - Video Items</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=slider-options">Slider Theme - Including And Options</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=video-icon">
+							Video Gallery							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=video-icon">Video Gallery - With Icon</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=video-both">Video Gallery - Title and Description</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=video-title">Video Gallery - Title Only</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=video-theme-options">Video Gallery - Theme Including And Options</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=video-items-syntax">Video Gallery - Items Syntax</a></li>			
+			 </ul>				</li>
+								<li class="dropdown">
+											<a class="dropdown-toggle" href="http://unitegallery.net/index.php?page=examples-skin">
+							More							<i class="icon icon-angle-down"></i>
+						</a>					
+					 <ul class="dropdown-menu"> 				<li><a href="http://unitegallery.net/index.php?page=examples-skin">Custom Skin Change</a></li>			
+							<li><a href="http://unitegallery.net/index.php?page=examples-api">Using The API</a></li>			
+			 </ul>				</li>
+										
+						</ul></nav>
+					</div>
+					
+	
+				</div>
+			</header>
+
+			<div role="main" class="main">
+			
+
+				<div class="container">
+				
+					
+	
+	<div id="documenter_content">
+	<section id="documenter_cover">
+	<h1>Unite Gallery</h1>
+	<h2>general purpose responsive gallery jquery plugin</h2>
+	<div id="documenter_buttons">
+		
+	</div>
+	<hr>
+	<ul>
+	<li>created: 06/20/2014</li>
+	
+	<li>by: valiano</li>
+	<li><a href="http://unitegallery.net/index.php?page=documentation"></a></li>
+	<li>email: <a href="mailto:web.power.net@gmail.com">web.power.net@gmail.com</a></li>
+	</ul>
+	<p></p>
+	</section>
+	
+	<section id="licence">
+	<div class="page-header"><h3>Licence</h3><hr class="notop"></div>
+<p>
+	This item brought under <a href="http://unitegallery.net/licence-mit.txt">MIT license</a>. It means that you can use it in every project of yours freely.
+</p><p>
+	&nbsp;</p>
+</section>
+<section id="gallery_structure">
+	<div class="page-header"><h3>Gallery Structure</h3><hr class="notop"></div>
+<p>	Each gallery theme could use different gallery elements. Every one have a slider (it's the area where the images are changing). The slider area have some buttons that could be added ti it like the zoom buttons and play/stop buttons, and the text panel.&nbsp;</p>
+<p>	Also, the themes could use some of the thumb panels available: strip thumbs panel and grid thumbs panel.</p>
+<p>	Each of the panels has it's own options, so if you using the theme that grid panel is available, only the grid panel options will be legitimate to it.&nbsp;</p>
+<p>	The gallery parts are on the image below:&nbsp;</p>
+<p>	<img alt="Gallery Parts" src="./Unite Gallery - Documentation_files/image_1.jpg"></p>
+</section>
+<section id="installing_the_gallery">
+	<div class="page-header"><h3>Installing The Gallery</h3><hr class="notop"></div>
+<div class="page-header">
+	<p>		<span style="font-size: 12px;">Installing the gallery is very easy.</span></p>
+</div>
+<p>	Firs, you have to copy / upload the unitegallery plugin folder to your server, to the same folder where your page located.</p>
+<p>	Then add the following code to your &lt;head&gt; section of your page:</p>
+<p>	
+
+<code class=" language-markup">
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+
+	<span class="token comment" spellcheck="true">&lt;!-- ... [OTHER INCLUDES] ... --&gt;</span>
+		
+		<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>'text/javascript'</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span>'<a href="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js</a>'</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
+		<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>'text/javascript'</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>'unitegallery/js/unitegallery.min.js'</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span> 
+		
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span>'stylesheet'</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span>'unitegallery/css/unite-gallery.css'</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>'text/css'</span> <span class="token punctuation">/&gt;</span></span> 
+		<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>'text/javascript'</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>'unitegallery/themes/default/ug-theme-default.js'</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span> 
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span>'stylesheet'</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span>'unitegallery/themes/default/ug-theme-default.css'</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>'text/css'</span> <span class="token punctuation">/&gt;</span></span> 
+
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+</code>
+
+</p>
+<p>	Then in the body put following gallery markup:</p>
+<p>	
+	<code class=" language-markup"> 
+	
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>gallery<span class="token punctuation">"</span></span> <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>display:none;<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+		
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Image 1 Title<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/image1.jpg<span class="token punctuation">"</span></span>
+				<span class="token attr-name">data-image</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/image1.jpg<span class="token punctuation">"</span></span>
+				<span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Image 1 Description<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+			
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Image 2 Title<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/image2.jpg<span class="token punctuation">"</span></span>
+				<span class="token attr-name">data-image</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/image02.jpg<span class="token punctuation">"</span></span>
+				<span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Image 2 Description<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+		
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+	
+	</code>
+</p>
+<p>	When:</p>
+<ul>	<li>		<strong>alt </strong>- image title (optional)</li>
+	<li>		<strong>src </strong>- url of the thumbnail image</li>
+	<li>		<strong>data-image</strong> - url of the big image.</li>
+	<li>		<strong>data-description</strong> - the description of the image (optional)</li>
+</ul>
+<p>	&nbsp;</p>
+<p>	Then add following javascript code in order to initiate the gallery:</p>
+<p>	
+	<code class=" language-markup"> 
+		
+		<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> 
+			
+			<span class="token function">jQuery<span class="token punctuation">(</span></span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready<span class="token punctuation">(</span></span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+				<span class="token function">jQuery<span class="token punctuation">(</span></span><span class="token string">"#gallery"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unitegallery<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+		
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
+	
+	</code>
+</p>
+<p>	&nbsp;</p>
+</section>
+<section id="markup_for_media_items">
+	<div class="page-header"><h3>Markup For Media Items</h3><hr class="notop"></div>
+<p>
+	The gallery can play follwoing media items: Youtube, Vimeo, Html5 Video, Wistia, SoundCloud</p>
+<p>
+	For settnig up the videos please use following markup:</p>
+<p>
+
+	<code class=" language-markup">
+		
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Youtube With Images<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>youtube<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/youtube_thumb.jpg<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-image</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/youtube_image.jpg<span class="token punctuation">"</span></span>		 
+			 <span class="token attr-name">data-videoid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>A3PDXmYoF5U<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Youtube video description<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+	
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Youtube Without Images<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>youtube<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-videoid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>A3PDXmYoF5U<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Youtube video description<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Vimeo Video<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>vimeo<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/vimeo_thumb.jpg<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-image</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/vimeo_image.jpg<span class="token punctuation">"</span></span>		 
+			 <span class="token attr-name">data-videoid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>73234449<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Vimeo Video Description<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Html5 Video<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/html5_video_thumb.png<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>html5video<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-image</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/html5_video_image.png<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-videoogv</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span><a href="http://video-js.zencoder.com/oceans-clip.ogv">http://video-js.zencoder.com/oceans-clip.ogv</a></span><span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-videowebm</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span><a href="http://video-js.zencoder.com/oceans-clip.webm">http://video-js.zencoder.com/oceans-clip.webm</a></span><span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-videomp4</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span><a href="http://video-js.zencoder.com/oceans-clip.mp4">http://video-js.zencoder.com/oceans-clip.mp4</a></span><span class="token punctuation">"</span></span>
+	    	 <span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Html5 Video Description<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Wistia Video<span class="token punctuation">"</span></span>			
+			 <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/wistia_thumb.jpg<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-image</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/wistia_image.jpg<span class="token punctuation">"</span></span>		 
+			 <span class="token attr-name">data-videoid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>9oedgxuciv<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Wistia video description!<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Sound Cloud Track<span class="token punctuation">"</span></span>			
+			 <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>thumbs/sound_cloud_thumb.jpg<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>soundcloud<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-image</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>images/sound_cloud_image.jpg<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-trackid</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>8390970<span class="token punctuation">"</span></span>
+			 <span class="token attr-name">data-description</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>SoundCloud track description<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+		
+</code>
+
+</p>
+<p>
+	<b>When:</b> </p>
+<p>
+	* For Youtube items the thumb and big images are not a must. If some of them is missing, the script will fill it from the youtube website.</p>
+</section>
+
+
+<section id="changing_skin">
+	<div class="page-header"><h3>Changing Skin</h3><hr class="notop"></div>
+<p>	Changing skin is very easy. &nbsp;First, you have to include the skin css (from skins folder of the gallery). Now tere is one additional skin for example: "alexis" skin, but you can add your skin simply by copying the alexis skin to another folder, rename it and change the graphical elements.</p>
+<p>	
+<code class=" language-markup">
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+	
+	[...other includes...]
+	
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span>'stylesheet'</span> 	<span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span>'unitegallery/skins/alexis/alexis.css'</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>'text/css'</span> <span class="token punctuation">/&gt;</span></span>
+	
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+	
+</code>
+</p>
+<p>	Then you have to choose what item skin you want to change. You can change every slider graphical item (all the buttons, bullets, arrows) that you have in options, grid arrows and handles. Also you can add every gallery element design that you want like gallery global wrapper css or slider css.</p>
+<p>	Also, you have global skin option (gallery_skin) that change all the skinnable elements (like global default setting).</p>
+<p>	Please see options below.</p>
+<p>	
+<code class=" language-javascript">
+	<span class="token function">jQuery<span class="token punctuation">(</span></span><span class="token string">"gallery"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unitegallery<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+		
+		gallery_skin<span class="token punctuation">:</span><span class="token string">"alexis"</span>			<span class="token comment" spellcheck="true">	//it's the default skin
+</span>		slider_bullets_skin<span class="token punctuation">:</span> <span class="token string">"alexis"</span>	<span class="token comment" spellcheck="true">	//example how to change only skin for slider bullets
+</span>	
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code>
+</p>
+<p>	&nbsp;</p>
+</section>
+<section id="changing_theme">
+	<div class="page-header"><h3>Changing Theme</h3><hr class="notop"></div>
+<p>	The themes located under unitegallery / themes folder.</p>
+<p>	For changing the theme you have to add it's javascript in "head" section of the page, and css of the theme then if available.</p>
+<p>	
+<code class=" language-markup">
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+	
+	[...other includes...]
+	
+		<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>'text/javascript'</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span>'unitegallery/themes/compact/ug-theme-compact.js'</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
+	
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+	
+</code>
+</p>
+<p>	after that in the javascript you need to change option: gallery_theme:"theme name" as you see in the folder.</p>
+<p>	Each theme has it's own options in addition to global gallery options. All the options you can see in theme pages in the unitegallery.net website.</p>
+<p>	
+<code class=" language-javascript">
+	<span class="token function">jQuery<span class="token punctuation">(</span></span><span class="token string">"gallery"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unitegallery<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+		
+		gallery_theme<span class="token punctuation">:</span><span class="token string">"compact"</span>	<span class="token comment" spellcheck="true">	//example how to change skin to "compact"
+</span>	
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code>
+</p>
+<p>	* Note, that some theme has it's own graphical elements like "default theme", and you can't change some of them, only to disable it and add them from the "slider" options. Like slider play button and fullscreen buttons in "default" theme. It's controlled from theme options and not from the slider options, so it's not skinnable, and slider options don't related to them.</p>
+<p>	* Note, that if you include only one theme per gallery page (example load only copmact skin js and remove the default theme js, then you don't have to use "gallery_theme" option. It will be loaded automatically.&nbsp;</p>
+<p>	&nbsp;</p>
+</section>
+<section id="using_the_api">
+	<div class="page-header"><h3>Using The API</h3><hr class="notop"></div>
+<p>
+	Using gallery API is very easy. You have some functions that can control the gallery functions and some events that happends on gallery states change.</p>
+<p>
+	First, you have to create the API variable in the javascript of the gallery creation:</p>
+<p>
+	<em>* note that the <strong>api </strong>variable has to be external, outside of the ready() function.</em></p>
+<p>
+		<code class=" language-markup">
+			
+		<span class="token script"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+			<span class="token keyword">var</span> api<span class="token punctuation">;</span>
+			<span class="token function">jQuery<span class="token punctuation">(</span></span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready<span class="token punctuation">(</span></span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+				api <span class="token operator">=</span> <span class="token function">jQuery<span class="token punctuation">(</span></span><span class="token string">"#gallery"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">unitegallery<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
+		
+		</code>
+</p>
+<p>
+	Then you can use the API variable in every javascript functions that you have and integrate.&nbsp; Below there is the functions that you can use arranged as javascript functions so you can copy / paste from the code window and use them in your code:</p>
+<p>
+		<code class=" language-javascript">
+			api<span class="token punctuation">.</span><span class="token function">play<span class="token punctuation">(</span></span><span class="token punctuation">)</span>				<span class="token comment" spellcheck="true">	//start play mode
+</span>			api<span class="token punctuation">.</span><span class="token function">stop<span class="token punctuation">(</span></span><span class="token punctuation">)</span>				<span class="token comment" spellcheck="true">	//stop play mode
+</span>			api<span class="token punctuation">.</span><span class="token function">togglePlay<span class="token punctuation">(</span></span><span class="token punctuation">)</span>		<span class="token comment" spellcheck="true">	//toggle play mode
+</span>			api<span class="token punctuation">.</span><span class="token function">enterFullscreen<span class="token punctuation">(</span></span><span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">	//enter fullscreen
+</span>			api<span class="token punctuation">.</span><span class="token function">exitFullscreen<span class="token punctuation">(</span></span><span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">	//exit fullscreen		
+</span>			api<span class="token punctuation">.</span><span class="token function">toggleFullscreen<span class="token punctuation">(</span></span><span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">	//toggle fullscreen
+</span>			api<span class="token punctuation">.</span><span class="token function">zoomIn<span class="token punctuation">(</span></span><span class="token punctuation">)</span>			<span class="token comment" spellcheck="true">	//zoom in current image
+</span>			api<span class="token punctuation">.</span><span class="token function">zoomOut<span class="token punctuation">(</span></span><span class="token punctuation">)</span>			<span class="token comment" spellcheck="true">	//zoom out current image
+</span>			api<span class="token punctuation">.</span><span class="token function">resetZoom<span class="token punctuation">(</span></span><span class="token punctuation">)</span>			<span class="token comment" spellcheck="true">	//reset zoom to fit zoom mode
+</span>			api<span class="token punctuation">.</span><span class="token function">nextItem<span class="token punctuation">(</span></span><span class="token punctuation">)</span>			<span class="token comment" spellcheck="true">	//next item
+</span>			api<span class="token punctuation">.</span><span class="token function">prevItem<span class="token punctuation">(</span></span><span class="token punctuation">)</span>			<span class="token comment" spellcheck="true">	//previous item
+</span>			api<span class="token punctuation">.</span><span class="token function">selectItem<span class="token punctuation">(</span></span>numItem<span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">	//go to some item by index (0-numItems)
+</span>			api<span class="token punctuation">.</span><span class="token function">resize<span class="token punctuation">(</span></span>width<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token comment" spellcheck="true">	//resize the gallery to some width. Height is optionary.
+</span>			api<span class="token punctuation">.</span><span class="token function">getItem<span class="token punctuation">(</span></span>numItem<span class="token punctuation">)</span>	<span class="token comment" spellcheck="true">	//get data object of the item by some index.
+</span>			api<span class="token punctuation">.</span><span class="token function">getNumItems<span class="token punctuation">(</span></span><span class="token punctuation">)</span>		<span class="token comment" spellcheck="true">	//get number of items in the gallery
+</span>		</code>
+</p>
+<p>
+	Also, there is API events on some gallery functionality that you can use. You can copy / paste the events code from the javascript code window and use it:&nbsp;</p>
+<p>
+		<code class=" language-javascript">
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"item_change"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">{</span>	<span class="token comment" spellcheck="true">	//on item change, get item number and item data
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"resize"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>			<span class="token comment" spellcheck="true">	//on gallery resize
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"enter_fullscreen"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment" spellcheck="true">	//on enter fullscreen
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"exit_fullscreen"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment" spellcheck="true">	//on exit fulscreen
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"play"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>			<span class="token comment" spellcheck="true">	//on start playing
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"stop"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>			<span class="token comment" spellcheck="true">	//on stop playing
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"pause"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>			<span class="token comment" spellcheck="true">	//on pause playing
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+			api<span class="token punctuation">.</span><span class="token function">on<span class="token punctuation">(</span></span><span class="token string">"continue"</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>		<span class="token comment" spellcheck="true">	//on continue playing
+</span>			<span class="token comment" spellcheck="true">	//do something
+</span>			<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		</code>
+	
+	</p>
+<p>
+	On some events and functions there is a item data object. It's fields are described below:</p>
+<p>
+	Note, that you can add additional data to the items as item data field, like: &lt;img src="thumbs/thumb1.jpg" data-yourfield="yourvalue" ...&gt; . Then you'll get that field in the data object together with other fields.</p>
+<p>
+	<code class=" language-javascript">
+		
+		data<span class="token punctuation">.</span>index			 
+		data<span class="token punctuation">.</span>title			 
+		data<span class="token punctuation">.</span>description
+		data<span class="token punctuation">.</span>urlImage
+		data<span class="token punctuation">.</span>urlThumb
+		
+	<span class="token comment" spellcheck="true">	//that taken from &lt;img... data-custom="value" ... &gt; from gallery markup
+</span>		
+		data<span class="token punctuation">.</span>custom <span class="token comment" spellcheck="true">	//item custom field passed.	
+</span>	
+	</code>
+	
+	</p>
+<p>
+	&nbsp;</p>
+</section>
+
+	</div>
+	
+	
+
+				</div>
+
+			</div>
+
+			<footer id="footer">
+		
+				<div class="footer-copyright">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-1">
+								<a href="http://unitegallery.net/index.php" class="logo">
+									<img alt="Unite Gallery Logo" src="./Unite Gallery - Documentation_files/logo_bottom.png">
+								</a>
+							</div>
+							<div class="footer-copy-row col-md-7">
+								<p>
+									© Copyright 2014. All Rights Reserved.
+									&nbsp;&nbsp;&nbsp;&nbsp; Photos by <a href="http://evelivesey.deviantart.com/" target="_blank">Eve Livesey</a>
+								</p>
+							</div>
+							<div class="footer-menu-row col-md-4">
+								<nav id="sub-menu">
+									<ul>
+										<li><a href="http://unitegallery.net/index.php?page=documentation">Documentation</a></li>
+										<li><a href="http://unitegallery.net/index.php?page=contact">Contact Us</a></li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52539524-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	
+
+</body></html>
