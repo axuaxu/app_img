@@ -21,8 +21,8 @@ for line in fin:
 	#print len(narr)
      if  len(narr)>3:
          painter = narr[2]
-         painterarr.append(painter)
          name = painter.split('-')
+         painterarr.append(painter)
          lastname = name[-1]
          fullname = painter.replace('-','')
          pic = narr[3]
@@ -76,9 +76,17 @@ sgg2 = "items = ['"
 tlen2 =len(sgg2)
 mark2 = outstr.find(sgg2)+tlen2
 outstr = outstr[:mark2]+instr+outstr[mark2:]
+
+sgg3 = "</header>"
+tlen3 =len(sgg3)
+mark3 = outstr.find(sgg3)+tlen3
+pailist =""
+for pai in list(set(painterarr)):
+    pailist = pailist + ' ' +pai 
+outstr = outstr[:mark3]+pailist+outstr[mark3:]
 fout.write(outstr)
 
-print(list(set(painterarr)))
+#print(list(set(painterarr)))
 
 
          #<img alt="Image 2 Title" 
