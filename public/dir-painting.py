@@ -5,18 +5,19 @@ import os
  
 # Set the directory you want to start from
 
-print('first check')
-rootDir = '.\images'
+#print('first check')
+#rootDir = '.\images'
 
 
 def flist():
-  t="dir,name,twi,extra\n"
+  #t="dir,name,twi,extra\n"
+  t = ""
   for dirName, subdirList, fileList in os.walk(rootDir):
     #print('Found directory: %s' % dirName)
      
     for fname in fileList:
         #print('\t%s' % fname)
-        t=t+dirName+','+fname+', , ,\n'
+        t=t+dirName+'\\'+fname+'\n'
   return t
 
 # writing csv
@@ -28,8 +29,10 @@ for painter in fp:
     listf = ".\csv\\"+painter+'.csv'
     listf = listf.replace('\n','')
     plistcsv = open(listf,'w')
-    print listf
-ft = flist()
+    rootDir = '.\images\\'+painter
+    #print listf
+    ft = flist()
+    plistcsv.write(ft)
 
 
  
