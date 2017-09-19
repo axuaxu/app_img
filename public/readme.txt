@@ -44,8 +44,10 @@ img-html-gg-05.py   write gammagallery htmls
 dir-img.py       param: [rootdir: .\images, output file: flist?.txt]
 list_painter_html.py   list painters params:[input:flist?.csv, ouput: painterlist?.html]
 list_painter_csv.py    list painters params:[input:flist?.csv, ouput: painterlist?.csv]
-
+dir-painting.py        writer painter's painting list 
+                       params:[input painterlist?.csv, output painter-name.csv]
 img-html-painter.py    write gammagallery htmls for painters
-                        params:[input: painterlist?.csv, output: pic-paintername-?.csv]
+                        params:[input: painterlist?.csv, output: paintername-?.html]
+
 
 
