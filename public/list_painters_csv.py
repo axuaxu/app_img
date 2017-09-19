@@ -1,7 +1,7 @@
 
 narr=[]
 fo = open('flist-01.csv','r')
-ofile = "painterlist-01.csv"
+ofile = ".\csv\painterlist-01.csv"
 fout = open(ofile,'w')
 painterarr=[]
 for line in fo:
