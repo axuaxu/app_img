@@ -21,7 +21,7 @@ for line in fo:
     status = status.title()
 
 pailist =""
-pl = list(set(painterarr))
+pl = sorted(list(set(painterarr)))
 for pai in pl :
     paistr = '<li><a = href="'+pai+'.html">'+pai.replace('-',' ')+'</a></li>'
     pailist = pailist + ' ' +paistr

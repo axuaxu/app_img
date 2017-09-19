@@ -1,0 +1,23 @@
+<html>
+<head>
+	<script src="js/jquery-3.2.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/t-infi.css"/><link>
+<script src="js/jquery.waypoints.js"></script>
+<script src="js/shortcuts/infinite.js"></script>
+</head>
+<body>
+<div class="infinite-container">
+ <div class="infinite-item"></div>
+ <div class="infinite-item style1"></div>
+ <div class="infinite-item style2"></div>
+ <div class="infinite-item style3"></div>
+ <div class="infinite-item style4"></div>
+ </div>
+ <a href="test-page2.html" id="next_page">Next Page</a>
+ <script type="text/javascript">
+$(document).ready(function () {
+$('.infinite-container').waypoint('infinite');
+});
+ </script>
+</body>
+</html>
