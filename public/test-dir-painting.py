@@ -13,10 +13,10 @@ def flist():
   #t="dir,name,twi,extra\n"
   t = ""
   for dirName, subdirList, fileList in os.walk(rootDir):
-    #print('Found directory: %s' % dirName)
+    print('Found directory: %s' % dirName)
      
     for fname in fileList:
-        #print('\t%s' % fname)
+        print('\t%s' % fname)
         t=t+dirName+'\\'+fname+'\n'
   return t
 
@@ -25,8 +25,9 @@ def flist():
 pfile = ".\csv\painterlist-01.csv"
 fp = open(pfile,'r')
 for painter in fp:
-    painter = painter.replace('\n','')
+    #print painter
     listf = ".\csv\\"+painter+'.csv'
+    listf = listf.replace('\n','')
     plistcsv = open(listf,'w')
     rootDir = '.\images\\'+painter
     print rootDir
