@@ -46,8 +46,13 @@ list_painter_html.py   list painters params:[input:flist?.csv, ouput: painterlis
 list_painter_csv.py    list painters params:[input:flist?.csv, ouput: painterlist?.csv]
 dir-painting.py        writer painter's painting list 
                        params:[input painterlist?.csv, output painter-name.csv]
-img-html-painter.py    write gammagallery htmls for painters
+img-html-painter-list-00.py    write gammagallery htmls for painters
                         params:[input: painterlist?.csv, output: paintername-?.html]
+
+img-html-random-01.py   listing random pics 
+                     param:[input file: img-?.csv, output file:img-html-gg-?.html
+                                template gg-?.html]
+
 
 
 
