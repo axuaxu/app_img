@@ -36,6 +36,7 @@ pic_down.py  download image  param:[input: xxx_url.txt,  download dir: \pics, \v
 
 build web site:
 img-tree-02.py   list image files    param: [dir, output file: img-?.csv]
+img-tree-03.py   list image files    param: [dir, output file: allimages?.csv]
 img-html-100.py      write unitegallery html files  
                      param:[input file: img-?.csv, output file: img-html-?.html template:img-html-100-?.html]
 img-html-gg-05.py   write gammagallery htmls
@@ -52,6 +53,11 @@ img-html-painter-list-00.py    write gammagallery htmls for painters
 img-html-random-01.py   listing random pics 
                      param:[input file: img-?.csv, output file:img-html-gg-?.html
                                 template gg-?.html]
+
+img-html-load.py       listing random pics  in img html with infinite load
+                       param:[input file: allimages?.csv, output file:img-html-gg-?.html
+                                template gg-?.html]
+
 
 
 
