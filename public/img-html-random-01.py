@@ -23,14 +23,15 @@ def ranfile(parr,outhtml,thtml):
     outstr = ""
     #read  template file
     i = 0
-    #paintinglist = []
-    for i in range(0,20):
-       i = i + 1
-       print parr[i]
+    plen = len(parr)
+    for i in range(0,plen):
+   
+       print i,parr[i]
        pstr = parr[i].replace('\n','')
        pcsv = ".\\csv\\"+pstr+".csv"
        fpcsv = open(pcsv,'r')
        imgarr = []
+       i = i + 1
        for painting in fpcsv:
            imgarr.append(painting)
        random.shuffle(imgarr)
@@ -71,7 +72,7 @@ def ranfile(parr,outhtml,thtml):
                 +imgsrc+'"></div><div data-src="'+imgsrc+'"></div><noscript><img src="' \
                 +imgsrc+'" alt="img03"/></noscript></div></li>'
                
-              print imgstr
+              #print imgstr
               instr = instr+imgstr
 
 #outstr = '"<div id="gallery" style="display:none;">'+instr+'</div>'
