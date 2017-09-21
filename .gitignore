@@ -1,6 +1,5 @@
 *.jpg
 *.png
 /node_modules
-/test-infinite
-/test-masonry
-/masonry-docs
+/test-infinite/*
+/test-masonry/*
