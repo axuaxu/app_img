@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+	</title>
+	<script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+</head>
+<body>
+ <div class="main">
+ <div class="container">
+
+  <div class="article-feed">
+  <!-- .articles will be added to .article-feed -->
+  <article class="article">As part of their March 2017 issue on VR, <a href="http://www.creativebloq.com/computer-arts-magazine">Computer Arts</a> featured the <a href="/blog/rgb-schemes-logo">RGB Schemes logo</a> in a five page spread. I got to share the nitty gritty of how the project came together, working through the brief, and all the stuff that didn&apos;t make the cut. <a href="https://www.myfavouritemagazines.co.uk/design/computer-arts-magazine-back-issues/computer-arts-march-2017-issue-263/">You can still grab a back issue online</a>.</article>
+  <article class="article">RGB Schemes logo</a> in a five page spread.</article>
+    ...
+  </div>
+  <!-- status elements -->
+<div class="scroller-status">
+  <div class="infinite-scroll-request loader-ellips">
+    ...
+  </div>
+  <p class="infinite-scroll-last">End of content</p>
+  <p class="infinite-scroll-error">No more pages to load</p>
+</div>
+
+<!-- pagination has path -->
+<p class="pagination">
+  <a class="pagination__next" href="page2.html">Next page</a>
+</p>
+ </div>
+</div>
+<script type="text/javascript">
+	$('.article-feed').infiniteScroll({
+  path: '.pagination__next',
+  append: '.article',
+  status: '.scroller-status',
+  hideNav: '.pagination',
+});
+</script>
+</body>
+</html>

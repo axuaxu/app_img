@@ -1,0 +1,110 @@
+html, body{
+	background-color:#fff;
+	padding:0;
+	margin:0;
+}
+
+#banner{
+	background:#000000;
+	cursor: pointer;
+	position:absolute;
+	width: 300px;
+	height: 250px;
+	overflow:hidden;
+	opacity:0;
+}
+
+#keyline {
+	width: 300px;
+	height: 250px;
+    position: absolute;
+	border: 1px solid #999999;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	overflow: hidden;
+  }
+  
+ #background{
+    background:url(background.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+}
+
+#background2{
+    background:url(background2.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+}
+#logo{
+    background:url(logo.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+}
+
+#copy1{
+    background:url(copy1.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+	left:-300px;
+}
+
+#copy1a{
+    background:url(copy1a.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+	left:-300px;
+}
+
+
+#copy2{
+    background:url(copy2.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+	left:-300px;
+}
+
+#copy3{
+    background:url(copy3.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+	left:-300px;
+}
+
+#copy3a{
+    background:url(copy3a.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+	left:-300px;
+}
+
+#cta{
+    background:url(cta.png) no-repeat;
+    position:absolute;
+    width:122px;
+    height:38px;
+	left:147px;
+	top:186px;
+}
+
+
+#modem{
+    background:url(modem.png) no-repeat;
+    position:absolute;
+    width:300px;
+    height:250px;
+}
+
+
+
+

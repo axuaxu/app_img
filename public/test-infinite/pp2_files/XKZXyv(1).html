@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0076)https://s.codepen.io/desandro/fullembedgrid/XKZXyv?type=embed&animations=run -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+  <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+  <title>CodePen - Flickity - groupCells</title>
+  <meta name="viewport" content="width=device-width">
+  
+  
+  <link rel="stylesheet prefetch" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+
+      <style>
+      /* external css: flickity.css */
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; }
+
+.carousel {
+  background: #EEE;
+}
+
+.carousel-cell {
+  width: 28%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+}
+
+.carousel-cell.is-selected {
+  background: #ED2;
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(carousel-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+</head>
+
+<body translate="no">
+
+  <h1>Flickity - groupCells</h1>
+
+<!-- Flickity HTML init -->
+<div class="carousel flickity-enabled is-draggable" data-flickity="{ &quot;groupCells&quot;: true }" tabindex="0">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<div class="flickity-viewport" style="height: 200px; touch-action: pan-y;"><div class="flickity-slider" style="left: 0px; transform: translateX(6.02%);"><div class="carousel-cell is-selected" style="position: absolute; left: 0%;"></div><div class="carousel-cell is-selected" style="position: absolute; left: 29.71%;"></div><div class="carousel-cell is-selected" style="position: absolute; left: 59.41%;"></div><div class="carousel-cell" style="position: absolute; left: 89.12%;"></div><div class="carousel-cell" style="position: absolute; left: 118.82%;"></div><div class="carousel-cell" style="position: absolute; left: 148.53%;"></div><div class="carousel-cell" style="position: absolute; left: 178.23%;"></div><div class="carousel-cell" style="position: absolute; left: 207.94%;"></div><div class="carousel-cell" style="position: absolute; left: 237.64%;"></div><div class="carousel-cell" style="position: absolute; left: 267.35%;"></div><div class="carousel-cell" style="position: absolute; left: 297.06%;"></div></div></div><button class="flickity-prev-next-button previous" type="button" disabled="" aria-label="previous"><svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button><button class="flickity-prev-next-button next" type="button" aria-label="next"><svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button><ol class="flickity-page-dots"><li class="dot is-selected"></li><li class="dot"></li><li class="dot"></li><li class="dot"></li></ol></div>
+    <script src="./stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js.download"></script>
+
+  <script src="./flickity.pkgd.js.download"></script>
+
+    <script>
+    // external js: flickity.pkgd.js
+  //# sourceURL=pen.js
+  </script>
+
+  
+  
+
+
+
+ </body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)https://s.codepen.io/elcontraption/fullembedgrid/RGPboR?type=embed&animations=run -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+  <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+  <title>CodePen - Flickity Transformer</title>
+  
+  
+  <link rel="stylesheet" href="./normalize.min.css">
+
+  <link rel="stylesheet prefetch" href="https://unpkg.com/flickity@2.0.3/dist/flickity.min.css">
+
+      <style>
+      .Slider {
+  width: 100vw;
+  height: 100vh;
+}
+
+.Slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 400px;
+  height: 400px;
+  font-size: 4rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.Slide:nth-child(0n+1) { background: #D32F2F; }
+.Slide:nth-child(0n+2) { background: #FFA000; }
+.Slide:nth-child(0n+3) { background: #FFD54F; }
+.Slide:nth-child(0n+4) { background: #4CAF50; }
+.Slide:nth-child(0n+5) { background: #2196F3; }
+.Slide:nth-child(0n+6) { background: #4A148C; }
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+</head>
+
+<body translate="no">
+
+  <div class="Slider flickity-enabled is-draggable" tabindex="0">
+  
+  
+  
+  
+  
+  
+<div class="flickity-viewport"><div class="flickity-slider" style="left: 0px; transform: translateX(27.78%);"><div class="Slide is-selected" style="position: absolute; left: 0%; transform: scale(0.8) translateY(0px) rotate(0deg) perspective(600px) rotateY(0deg);">1</div><div class="Slide" style="position: absolute; left: 44.44%; transform: scale(0.5) translateY(200px) rotate(30deg) perspective(600px) rotateY(-45deg);">2</div><div class="Slide" style="position: absolute; left: 88.89%; transform: scale(0.5) translateY(400px) rotate(30deg) perspective(600px) rotateY(-45deg);">3</div><div class="Slide" style="position: absolute; left: 133.33%; transform: scale(0.5) translateY(500px) rotate(30deg) perspective(600px) rotateY(-45deg);">4</div><div class="Slide" style="position: absolute; left: 177.78%; transform: scale(0.5) translateY(500px) rotate(30deg) perspective(600px) rotateY(-45deg);">5</div><div class="Slide" style="position: absolute; left: 222.22%; transform: scale(0.5) translateY(500px) rotate(30deg) perspective(600px) rotateY(-45deg);">6</div></div></div><button class="flickity-prev-next-button previous" type="button" disabled="" aria-label="previous"><svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button><button class="flickity-prev-next-button next" type="button" aria-label="next"><svg viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button></div>
+    <script src="./stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js.download"></script>
+
+  <script src="./flickity.pkgd.min.js.download"></script>
+<script src="./flickity-transformer.pkgd.min.js.download"></script>
+
+    <script>
+    'use strict';
+
+/**
+ * Flickity Transformer
+ *
+ * https://github.com/elcontraption/flickity-transformer
+ *
+ * By Darin Reid: elcontraption.com
+ * 
+ * Find Metafizzy's Flickity here: https://flickity.metafizzy.co/
+ *
+ * What is this?
+ * Flickity Transformer hooks into version 2's new `scroll` event to apply css transforms to slides.
+ *
+ * How do I play with this?
+ * - Create a transform in the `transforms` array. Each transform must have two properties: `name` (the transform function name), and an array of `stops`.
+ * - Each stop is an array with two values: x position in pixels relative to the home position of your carousel, and the transform value to apply at that position.
+ *
+ * See documentation at https://github.com/elcontraption/flickity-transformer
+ *
+ */
+var flkty = new Flickity('.Slider', {
+  setGallerySize: false,
+  pageDots: false
+});
+
+var transformer = new FlickityTransformer(flkty, [{
+  name: 'scale',
+  stops: [[-300, 0.5], [0, 0.8], [300, 0.5]]
+}, {
+  name: 'translateY',
+  stops: [[-1000, 500], [0, 0], [1000, 500]]
+}, {
+  name: 'rotate',
+  stops: [[-300, -30], [0, 0], [300, 30]]
+}, {
+  // Declare perspective here, before rotateY. At least two stops are required, hence the duplication.
+  name: 'perspective',
+  stops: [[0, 600], [1, 600]]
+}, {
+  name: 'rotateY',
+  stops: [[-300, 45], [0, 0], [300, -45]]
+}]);
+  //# sourceURL=pen.js
+  </script>
+
+  
+  
+
+
+
+ </body></html>

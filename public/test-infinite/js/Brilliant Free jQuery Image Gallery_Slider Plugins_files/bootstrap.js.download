@@ -1,0 +1,880 @@
+/*
+ * global document, window, location, XMLHttpRequest, XDomainRequest,
+ * ActiveXObject, parent, console, screen, setTimeout, navigator
+ */
+(function () {
+    'use strict';
+
+    var scriptExecStartTime = +new Date();
+
+    /**
+     * Proxies console.error if console.error exists, otherwise does nothing.
+     */
+    function reportError(/* arguments... */) {
+        try {
+            if (window.console && window.console.error) {
+                console.error.apply(console, arguments);
+            }
+        } catch(error) {
+            // This is probably IE8
+        }
+    }
+
+    function addEventListener(eventTarget, type, listener) {
+        if (eventTarget.addEventListener) {
+            eventTarget.addEventListener(type, listener);
+        } else if (eventTarget.attachEvent) {
+            eventTarget.attachEvent(type, listener);
+        } else {
+            reportError("Cannot attach event listener: No event listener support.");
+        }
+    }
+
+    /**
+     * Submit a cross-domain HTTP request.
+     * @param options   An object with the following keys:
+     *     method: the HTTP method to use (must be either "GET" or "POST", case sensitive)
+     *     url: the URL to request
+     *     headers: An object of HTTP headers and values to set. Ignored if XDomainRequest must be used.
+     *     body: The request body as a string. Only used when method is "POST".
+     * @returns {boolean} true indicates success
+     * @throws never
+     */
+    function submitHttpRequest(options) {
+        try {
+            var xhr = new XMLHttpRequest();
+            if ((typeof XDomainRequest == 'undefined') || ('withCredentials' in xhr)) {
+                xhr.open(options.method, options.url, /* async */ true);
+                if (options.headers) {
+                    for (var k in options.headers) {
+                        if (!options.headers.hasOwnProperty(k)) {
+                            continue;
+                        }
+
+                        var v = options.headers[k];
+                        xhr.setRequestHeader(k, v);
+                    }
+                }
+                if (options.method === "POST") {
+                    xhr.send(options.body);
+                } else {
+                    xhr.send();
+                }
+            } else {
+                var xdr = new XDomainRequest();
+                if (!xdr) {
+                    reportError("Failed to create XDomainRequest");
+                    return false;
+                }
+                xdr.open(options.method, options.url);
+                // XDR does not support custom headers.
+                if (options.method === "POST") { // XDR only supports GET and POST.
+                    xdr.send(options.body);
+                } else {
+                    xdr.send();
+                }
+            }
+        } catch (exc) {
+            reportError(exc);
+            return false;
+        }
+        return true;
+    }
+
+    var trackingClientMod = (function () {
+        function copyProperties(dest, src, props) {
+            for (var i = 0; i < props.length; ++i) {
+                var prop = props[i];
+                if (src.hasOwnProperty(prop)) {
+                    dest[prop] = src[prop];
+                }
+            }
+        }
+
+        function newTrackingClient(params) {
+            var baseURL = params.baseURL;
+
+            return {
+                submitEvent: function submitEvent(event) {
+                    var body = {
+                        isJsClient: true
+                    };
+
+                    copyProperties(body, event, [
+                        "isJsClient", // allows adapter to handle JS and no-JS events uniformly
+                        "ae",
+                        "eventId",
+                        "ip",
+                        "referer",
+                        "postalCode",
+                        "debug"
+                    ]);
+
+                    var collection = event.type + "s";
+                    var url = (
+                        baseURL + "/campaigns/" +
+                        encodeURIComponent(event.serviceId) + "/" +
+                        encodeURIComponent(event.campaignId) + "/variations/" +
+                        encodeURIComponent(event.variation) + "/" +
+                        collection
+                        );
+
+                    submitHttpRequest({
+                        method: "POST",
+                        url: url,
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(body)
+                    });
+                }
+            };
+        }
+
+        return {
+            newTrackingClient: newTrackingClient
+        };
+    })();
+
+    var trackingClient = null;
+
+    function getHostName(url) {
+        // Create an anchor element to take advantage of the browser's URL
+        // parsing logic.
+        var elt = document.createElement("a");
+        elt.href = url;
+        return elt.hostname;
+    }
+
+    function doesStringEndWith(subjectString, searchString) {
+        // Adapted from String.endsWith polyfill from
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith
+        var position = subjectString.length - searchString.length;
+        // This call should always return -1 for
+        // searchString.length > subjectString.length, so no further checking
+        // is necessary.
+        var lastIndex = subjectString.indexOf(searchString, position);
+        return lastIndex !== -1 && lastIndex === position;
+    }
+
+    /**
+     * Returns the string from searchStrings that subjectString ends with
+     * if any, otherwise null.
+     */
+    function findSuffixInList(subjectString, searchStrings) {
+        for (var i = 0; i < searchStrings.length; ++i) {
+            if (doesStringEndWith(subjectString, searchStrings[i])) {
+                return searchStrings[i];
+            }
+        }
+
+        return null;
+    }
+
+    function getTrackingServiceInfo(scriptSource) {
+        try {
+            var QA_HOST = "placelocalqa.com";
+            var STAGING_HOST = "placelocalstaging.com";
+            var PROD_HOST = "placelocal.com";
+
+            var host = getHostName(scriptSource);
+            var info = {};
+
+            // Assign the host name suffix from the list to the suffix variable,
+            // or null if not found (expected for dev-zone instances).
+            var suffix = findSuffixInList(host, [
+                PROD_HOST,
+                QA_HOST,
+                STAGING_HOST
+            ]);
+
+            if (suffix === PROD_HOST) {
+                info.zone = "prod";
+            } else {
+                // There's no canonical dev-zone instance of the tracking system,
+                // so use master on staging instead.
+                info.zone = "staging";
+            }
+
+            if (suffix === null) {
+                // The null suffix is a special case because it represents
+                // multiple dev-zone instances of placelocal.
+                info.serviceId = host;
+            } else {
+                info.serviceId = suffix;
+            }
+
+            return info;
+        } catch (exc) {
+            reportError(exc);
+            return null;
+        }
+    }
+
+    // For a creativeURL like:
+    //   https://creative.placelocal.com/xyz/dbf16d3b-1b75-4fca-b70e-415b07946a8e/abc.js
+    // Returns:
+    //   dbf16d3b-1b75-4fca-b70e-415b07946a8e
+    function getCampaignUUID(creativeURL) {
+        try {
+            if (params.campaign_uuid) {
+                return params.campaign_uuid;
+            }
+
+            if (!creativeURL) {
+                return null;
+            }
+
+            var components = creativeURL.split("/");
+
+            if (components.length < 2) {
+                return null;
+            }
+
+            var candidate = components[components.length - 2];
+
+            // See PL-16836. Some deployments of PlaceLocal use a different URL pattern.
+            if (candidate === "creatives") {
+                if (components.length < 3) {
+                    return null;
+                }
+
+                return components[components.length - 3];
+            }
+
+            return candidate;
+        } catch (exc) {
+            reportError(exc);
+            return null;
+        }
+    }
+
+    var params,
+        // unique tracking event id used to match tracking events w/ fraud
+        // probability info
+        eventIdValue = s4() + s4() + s4() + s4();
+
+        if(window.PaperG_V3 === undefined){
+            window.PaperG_V3 = [];
+        }
+
+        if(window.PaperG_V3_Counter === undefined){
+            window.PaperG_V3_Counter = 0;
+        } else {
+            window.PaperG_V3_Counter++;
+        }
+
+        var dimensions = {
+            medium_rectangle: {width:300, height: 250, platform: 'desktop'},
+            leaderboard: {width: 728, height: 90, platform: 'desktop'},
+            skyscraper: {width: 160, height: 600, platform: 'desktop'},
+            halfpage: {width: 300, height: 600, platform: 'desktop'},
+            smartphone_wide_banner: {width: 320, height: 50, platform: 'mobile'},
+            smartphone_banner: {width: 300, height: 50, platform: 'mobile'},
+            'feature-phone-large-banner': {width: 216, height: 36, platform: 'mobile'},
+            'feature-phone-medium-banner': {width: 168, height: 28, platform: 'mobile'},
+            'feature-phone-small-banner': {width: 120, height: 20, platform: 'mobile'}
+        };
+
+    function isPlScriptTag(tag) {
+        var pattern = /placelocal/i;
+        return pattern.test(tag.src);
+    }
+
+    function getThisScript() {
+        if (!document.currentScript) {
+            // If document.currentscript doesn't exist then we need to find the
+            // last instance of a script tag with "placelocal" in the url. This
+            // gives us a fairly high confidence in choosing the right tag
+            var scripts = document.getElementsByTagName('script');
+            var tag;
+            for (var i = scripts.length - 1; i >= 0; i--) {
+                tag = scripts[i];
+                if (isPlScriptTag(tag)) {
+                    break;
+                }
+            }
+            return tag;
+        }
+        return document.currentScript;
+    }
+
+        var thisScript = getThisScript();
+
+        function getReferrer() {
+        //if we were passed a referrer=? parameter, use it
+        if(params.referrer && params.referrer.length > 0){
+        return params.referrer[0];
+        } else {
+        if(parent !== window){ //otherwise, if we're inside an iframe, get the referrer
+            return document.referrer;
+        } else {
+            return window.location.href; //otherwise use the window location
+        }
+        }
+    }
+
+    function getParams(data) {
+        var key, result = "";
+        for (key in data) {
+            if (data.hasOwnProperty(key)) {
+                if (result === "") {
+                    result += "?";
+                } else {
+                    result += "&";
+                }
+                result += encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+            }
+        }
+        return result;
+    }
+
+    function getURL(base, data) {
+        return base + getParams(data);
+    }
+
+
+    function insideIframe(){
+        try {
+            return thisScript.parentNode && thisScript.parentNode.nodeName === 'iframe';
+        } catch (e) {
+            return true;
+        }
+    }
+
+    function isSSL(){
+        if(insideIframe()){
+            return location.protocol === 'https:';
+        } else {
+            return thisScript.src.indexOf('https') === 0;
+        }
+    }
+
+    function parseQuery(query) {
+        var params = {},
+            pairs,
+            i,
+            keyVal,
+            key,
+            val,
+            clickTagToken,
+            clickTagIndex,
+            landingPageToken,
+            landingPageIndex,
+            versionToken,
+            versionIndex;
+
+        if (!query) {
+            return params;
+        }
+        if(query.length > 0 && query[0] === '?'){
+            query = query.substring(1);
+        }
+        pairs = query.split(/[&]/);
+
+        for (i = 0; i < pairs.length; i += 1) {
+            keyVal = splitOnce(pairs[i], '=');
+            if (keyVal && keyVal.length === 2) {
+                key = decodeURIComponent(keyVal[0]);
+                val = decodeURIComponent(keyVal[1]);
+                val = val.replace(/\+/g, ' ');
+                if (!params[key]) {
+                    params[key] = val;
+                }
+            }
+        }
+
+        // Check if we need v2 or v3 of clickTag parsing (Identified by v=2 or v=3 in
+        // the query string parameter).
+        // With a version 2/3 of the clickTag, we treat everything after the
+        // clickTag= as the click tracker, otherwise we just use normal
+        // query string parameter parsing.
+        clickTagToken = '&clickTag=';
+        clickTagIndex = query.lastIndexOf(clickTagToken);
+        if (params.v && (params.v >= 2) && clickTagIndex > 0) {
+            params.clickTag = decodeURIComponent(query.substring(clickTagIndex + clickTagToken.length));
+        }
+
+        // In version 3 of the ad tag query string, the &v=3 marker is expected to follow
+        // immediately after the landing_page query string parameter.
+        // If we have both "&v=3" and the "&landing_page=" in the query string, take
+        // everything between those tokens as the landing page and URL decode it.
+        // NOTE: This is a workaround when landing_page is not URL encoded (Currently
+        //       this is the case when using a landing page macro).  We're still decoding
+        //       because that is the common case.
+        landingPageToken = '&landing_page=';
+        landingPageIndex = query.indexOf(landingPageToken);
+        versionToken = '&v=3';
+        versionIndex = query.lastIndexOf(versionToken);
+        if (params.v &&
+            params.v >= 3 &&
+            landingPageIndex > 0 &&
+            versionIndex > 0 &&
+            versionIndex > landingPageIndex) {
+            params.landing_page = query.substring(landingPageIndex + landingPageToken.length, versionIndex);
+            params.landing_page = decodeURIComponent(params.landing_page);
+        }
+
+        return params;
+    }
+
+    function splitOnce(keyVal, splitChar) {
+        var keyValArray = [keyVal, ''];
+        var splitIndex = keyVal.indexOf(splitChar);
+
+        if (splitIndex !== -1) {
+            keyValArray = [keyVal.slice(0, splitIndex), keyVal.slice(splitIndex + 1)];
+        }
+
+        return keyValArray;
+    }
+
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+
+    function getQueryVariable(text, variable) {
+        var query = text;
+        if(query.length > 0 && query[0] === '?'){
+            query = query.substring(1);
+        }
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = splitOnce(vars[i], '=');
+            if (decodeURIComponent(pair[0]) == variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+    }
+
+    function configure() {
+    }
+
+    function isPreview(){
+        return (!!(params.p) && (params.p != 0));
+    }
+
+    function isAe(){
+        return (!!(params.ex) && (params.ex != 0));
+    }
+
+    function isClickTrackerIncluded() {
+        return params.clickTrackerIncluded && params.clickTrackerIncluded != 0;
+    }
+
+    function urlToQueryString(url) {
+        var location = url.indexOf('?');
+        if (location === -1) {
+            return '';
+        }
+        return url.slice(location);
+    }
+
+    var windowQuery = urlToQueryString(window.location.href);
+    var scriptQuery = urlToQueryString(thisScript.src) ;
+
+    var queryString = thisScript.src ? scriptQuery : windowQuery;
+    params = parseQuery(queryString);
+
+    var scriptGuid = s4() + s4() + s4() + s4();
+    var configCallbackName = 'configCallback' + scriptGuid;
+
+    window[configCallbackName] = configure;
+
+    var creativeUrl = getQueryVariable(queryString, 'creativeUrl');
+    var trackingServiceInfo = getTrackingServiceInfo(thisScript.src);
+    var campaignUUID = getCampaignUUID(creativeUrl);
+
+    function makeTrackingObject(eventType) {
+        // This trial only covers ad tags that have a UUID in them.
+        if (!trackingServiceInfo || !campaignUUID) {
+            return null;
+        }
+
+        function getVariationString(params) {
+            var variationArray = [];
+
+            if (params.dimension_name) {
+                variationArray.push('size=' + params.dimension_name);
+            }
+
+            if (params.variation_id) {
+                variationArray.push('variation_id=' + params.variation_id);
+            }
+
+            // Explicitly sort the variations because order is important
+            // for consistency and simplify reporting
+            variationArray.sort();
+
+            return variationArray.join(';');
+        }
+
+        var debug = {
+            timing: {
+                eventSubmission: +new Date(),
+                scriptExecStart: scriptExecStartTime
+            }
+        };
+
+        if (window.performance && window.performance.timing) {
+            debug.timing.fetchStart = window.performance.timing.fetchStart;
+            debug.timing.domLoading = window.performance.timing.domLoading;
+        }
+
+        var result = {
+            serviceId:   trackingServiceInfo.serviceId,
+            campaignId:  campaignUUID,
+            type:        eventType,
+            eventId:     eventIdValue,
+            isJsClient:  true,
+            referer:     getReferrer(),
+            variation:   getVariationString(params),
+            debug:       debug
+        };
+
+        if (params.ex) {
+            var sellerIdNum = parseInt(params.sellerID);
+            if (!isNaN(sellerIdNum)) {
+                result.ae = {
+                    exchange: 'appnexus',
+                    data: {
+                        sellerId: sellerIdNum
+                    }
+                };
+            }
+        }
+
+        if (params.postal_code) {
+            result.postalCode = params.postal_code;
+        }
+
+        return result;
+    }
+
+    function getTrackingBaseURL(trackingServiceInfo) {
+        // Use a CTS name ending with placelocal.com in production only to
+        // reduce differences between old and new CTS for testing purposes.
+        // This logic should not be retained after the trial. See PL-17155.
+        if (trackingServiceInfo.zone !== 'prod') {
+            return (
+                '//tracking.campaign-tracking-service.' +
+                trackingServiceInfo.zone +
+                '.paperg.com'
+                );
+        }
+
+        return '//tracking.campaign-tracking-service.placelocal.com';
+    }
+
+    function submitEvent(eventType) {
+        try {
+            if (trackingClient === null) {
+                if (!trackingServiceInfo) {
+                    return;
+                }
+
+                trackingClient = trackingClientMod.newTrackingClient({
+                    baseURL: getTrackingBaseURL(trackingServiceInfo)
+                });
+            }
+
+            var event = makeTrackingObject(eventType);
+            if (event !== null) {
+                trackingClient.submitEvent(event);
+            }
+        } catch (exc) {
+            reportError(exc);
+        }
+    }
+
+    function makeNewTrackingPixelUrl() {
+        try {
+            if (!trackingServiceInfo) {
+                return null;
+            }
+
+            var event = makeTrackingObject('impression');
+            if (event === null) {
+                return null;
+            }
+
+            var url = (
+                getTrackingBaseURL(trackingServiceInfo) +
+                '/campaigns/' +
+                encodeURIComponent(event.serviceId) +
+                '/' +
+                encodeURIComponent(event.campaignId) +
+                '/variations/' +
+                encodeURIComponent(event.variation) +
+                '/pixel.gif'
+                );
+
+            var queryParams = {
+                isJsClient: ''
+            };
+
+            if (event.ae) {
+                queryParams['ae.exchange'] = event.ae.exchange;
+                if (event.ae.data && event.ae.data.sellerId) {
+                    queryParams['ae.data.sellerId'] = event.ae.data.sellerId;
+                }
+            }
+
+            if (event.postalCode) {
+                queryParams['postalCode'] = event.postalCode;
+            }
+
+            if (event.referer) {
+                queryParams['referer'] = event.referer;
+            }
+
+            if (event.eventId) {
+                queryParams['eventId'] = event.eventId;
+            }
+
+            var timing = event.debug.timing;
+
+            if (timing.fetchStart !== undefined) {
+                queryParams['fetchStartTime'] = timing.fetchStart.toString();
+            }
+
+            if (timing.domLoading !== undefined) {
+                queryParams['domLoadingTime'] = timing.domLoading.toString();
+            }
+
+            queryParams['eventSubmissionTime'] = timing.eventSubmission.toString();
+            queryParams['scriptExecStartTime'] = timing.scriptExecStart.toString();
+
+            return getURL(url, queryParams);
+        } catch (exc) {
+            reportError(exc);
+            return null;
+        }
+    }
+
+    /// Check if two DOM nodes are reference-equal
+    function isSameNode(a, b) {
+        // If isSameNode isn't present, we assume that the browser
+        // is new enough to support === with equivalent semantics.
+        // If the browser is older than isSameNode, nothing will work
+        // anyway.
+        if (typeof a.isSameNode !== 'undefined') {
+            return a.isSameNode(b);
+        }
+
+        return a === b;
+    }
+
+    function findHref(startElement, root) {
+        for (var element = startElement;
+             element !== null && !isSameNode(root, element);
+             element = element.parentNode) {
+            var href = element.getAttribute('href');
+            if (href !== null && href.length > 0) {
+                return href;
+            }
+        }
+
+        return null;
+    }
+
+    function attachClickFunction() {
+        var container = document.getElementById('creative-container-' + window.PaperG_V3_Counter);
+        var isFirstClick = true;
+
+        function clickFunction(event) {
+            if (isFirstClick) {
+                if (!isPreview()) {
+                    submitEvent('click');
+                }
+            }
+
+            var landingPage = findHref(event.target, container);
+
+            var isDefaultLandingPage = false;
+
+            if (landingPage === null) {
+                isDefaultLandingPage = true;
+                landingPage = params.landing_page;
+            }
+
+            // Also include clickTag for preview AE campaigns so we pass the click test
+            var needsClickTracker = isAe() || !isPreview();
+            // clickTrackerIncluded only applies to the default landing page
+            var landingPageHasClickTracker = isClickTrackerIncluded() && isDefaultLandingPage;
+
+            var newUrl;
+
+            if (needsClickTracker && !landingPageHasClickTracker) {
+                newUrl = params.clickTag + landingPage;
+            } else {
+                newUrl = landingPage;
+            }
+
+            window.open(newUrl);
+
+            event.preventDefault();
+            isFirstClick = false;
+        }
+
+        addEventListener(container, 'click', clickFunction);
+    }
+
+
+    function attachHoverFunction() {
+        var container = document.getElementById('creative-container-' + window.PaperG_V3_Counter);
+        var isFirstHover = true;
+
+        if (isPreview()) {
+            return;
+        }
+
+        addEventListener(container, 'mouseover', function () {
+            if (isFirstHover) {
+                isFirstHover = false;
+                submitEvent('hover');
+            }
+        });
+    }
+
+    var dimensionInfo = getDimensionInfo(params.dimension_name);
+    var width = dimensionInfo.width;
+    var height = dimensionInfo.height;
+    var platform = dimensionInfo.platform;
+
+    var animationTime = params.animationTime;
+    if(animationTime === undefined){
+        animationTime = '';
+    }
+
+    function getDimensionInfo(dimensionName) {
+        // Set default values
+        var dimensionInfo = {'width': 0, 'height': 0, platform: 'desktop'};
+
+        if (dimensions[params.dimension_name]) {
+            // Successfully looked up from existing dimensions
+            dimensionInfo = dimensions[params.dimension_name];
+        } else {
+            // Extract dimension info from encoded dimension name
+            // Encoded Dimension Names are of the following format: wWIDHT_hHEIGHT_pPLATFORM
+            // ie: w300_h250_pdesktop
+            var dimensionNameParts = dimensionName.split("_");
+            var numParts = dimensionNameParts.length;
+            for (var i = 0; i < numParts; i++) {
+                var dimensionPartInfo = getDimensionPartInfo(dimensionNameParts[i]);
+                if (dimensionPartInfo) {
+                    dimensionInfo[dimensionPartInfo['key']] = dimensionPartInfo['value'];
+                }
+            }
+        }
+
+        return dimensionInfo;
+    }
+
+    // Dimension name part is expected to be one of the following:
+    // wWIDTH, hHEIGHT, or pPLATFORM
+    // ie w300, h250, pdesktop
+    function getDimensionPartInfo(dimensionNamePart) {
+        var result = {};
+        var key = dimensionNamePart.substr(0, 1);
+        var value = dimensionNamePart.substr(1);
+
+        result['value'] = value;
+        switch (key) {
+            case 'w':
+                result['key'] ='width';
+                break;
+            case 'h':
+                result['key'] ='height';
+                break;
+            case 'p':
+                result['key'] ='platform';
+                break;
+            default:
+                result = null;
+                break;
+        }
+
+        return result;
+    }
+
+    function isIE(version, comparison) {
+        var cc      = 'IE',
+            b       = document.createElement('B'),
+            docElem = document.documentElement,
+            isIE;
+
+        if(version){
+            cc += ' ' + version;
+            if(comparison){ cc = comparison + ' ' + cc; }
+        }
+        b.innerHTML = '<!--[if '+ cc +']><b id="iecctest"></b><![endif]-->';
+        docElem.appendChild(b);
+        isIE = !!document.getElementById('iecctest');
+        docElem.removeChild(b);
+        return isIE;
+    }
+
+    function shouldServeBackupImage() {
+        return isIE(8, 'lte');
+    }
+
+    function getBackupImageUrl(campaignId, width, height, platform) {
+        var designator = "w" + width + "_h" + height + "_p" + platform;
+        return '//' + params.domain_name + '/backup_image.php?campaign_id=' + campaignId + '&designator=' + designator;
+    }
+
+    function createStyleAttribute(style){
+        var result = 'style=\"';
+        for(var key in style){
+            if(style.hasOwnProperty(key)){
+                result += key.toString() + ':' + style[key] + ';';
+            }
+        }
+        result += '"';
+        return result;
+    }
+
+    var divStyle = createStyleAttribute({
+        display: 'block',
+        position: 'relative',
+        width: width.toString() + 'px',
+        height: height.toString() + 'px',
+        left: 0,
+        top: 0,
+        overflow: 'hidden'
+    });
+
+    document.write('<div ' + divStyle + '>');
+    if(!isPreview()){
+        var newTrackingPixelUrl = makeNewTrackingPixelUrl();
+        if (newTrackingPixelUrl) {
+            document.write('<img src="' + newTrackingPixelUrl + '" border="0" style="display:none">');
+        }
+    }
+    document.write('<style type="text/css">.pl-loader-974f3d80-bb74-11e3-a5e2-0800200c9a66 { position:absolute; top:50%; left:50%; margin:-8px 0 0 -8px; z-index:-1; }</style>');
+
+    document.write('<img class="pl-loader-974f3d80-bb74-11e3-a5e2-0800200c9a66" src="data:image/gif;base64,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" alt=""/>');
+
+    document.write('<div id="creative-container-' + window.PaperG_V3_Counter + '" event-id="' + eventIdValue + '"></div>');
+
+    window.PaperG_V3[window.PaperG_V3_Counter] = {
+        domain: getQueryVariable(thisScript.src, 'domain_name'),
+        animationTime: getQueryVariable(thisScript.src, 'animationTime'),
+        finalFrame: getQueryVariable(thisScript.src, 'finalFrame'),
+        ssl: isSSL()
+    };
+
+    // Check if we should serve the static backup or the normal creative
+    if (shouldServeBackupImage()) {
+        document.write('<img src="' + getBackupImageUrl(params.campaignID, width, height, platform) + '" border="0"/>');
+    } else {
+        document.write('<script type="text/javascript" src="' + creativeUrl +'"></script>');
+    }
+    document.write('</div>');
+
+    attachHoverFunction();
+    attachClickFunction();
+})();

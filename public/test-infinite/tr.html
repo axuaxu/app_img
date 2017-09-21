@@ -1,0 +1,35 @@
+<html>
+<header>
+	<script src="./js/jquery-3.2.1.js"></script>
+	<script src="./js/infinite-scroll.pkgd.js"></script>
+</header>
+<body>
+	<div class="article-feed">
+  <!-- .articles will be added to .article-feed -->
+  <article class="article">article 001 this is a place of article</article>
+  <article class="article">article 002  this is a place of second article</article>
+   
+   </div>
+   <!-- status elements -->
+<div class="scroller-status">
+  <div class="infinite-scroll-request loader-ellips">
+  loading
+  </div>
+  <p class="infinite-scroll-last">End of content</p>
+  <p class="infinite-scroll-error">No more pages to load</p>
+</div>
+
+<!-- pagination has path -->
+<p class="pagination">
+  <a class="pagination__next" href="page2.html">Next page</a>
+</p>
+<script type="text/javascript">
+	$('.article-feed').infiniteScroll({
+  // options
+  path: '.pagination__next',
+  append: '.article',
+  history: false,
+});
+</script>
+</body>
+</html>

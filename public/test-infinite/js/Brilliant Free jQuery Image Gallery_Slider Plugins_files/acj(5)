@@ -1,0 +1,17 @@
+OX_466ab1ff7806a({
+  "ads":{
+    "medium":"w",
+    "record_tmpl":"http://freestar-d.openx.net/{medium}/1.0/{rtype}?ts={txn_state}",
+    "pixels":"http://us-u.openx.net/w/1.0/pd?plm=10&ph=89b2e804-9392-4144-aae0-0555f3960da4",
+    "oxt": 4.454,
+    "adunits" : [
+      {
+        "auid":"538583837",
+        "chain_revenue":"",
+        "size":"300x250",
+        "chain":[
+        ]
+      }
+    ]
+  }
+});

@@ -8,32 +8,13 @@ import random
 
 #print('first check')
 #rootDir = '.\images'
-
- 
-def ranfile(parr,outhtml,thtml):
-    
-    fout = open(outhtml,'w')
-    
-    fhtml = open(thtml,'r')
-    htmlstr = fhtml.read()
-    sgg = '<ul class="gamma-gallery">'
-    tlen = len(sgg)
-    mark = htmlstr.find(sgg)+tlen
+def getInstr(inum,delta,parr):
+    i = inum
     instr = ""
-    outstr = ""
-    #read  template file
-    i = 0
-    plen = len(parr)
-
-    for i in range(0,20):
-   
-      
-       #paintinglist = paintinglist.append(imgarr[0])
-	      #print line
-       narr = parr[i].split('\\')
-       i = i + 1
-	      #print len(narr)
-       if  len(narr)>3:
+    for i in range(inum,inum+delta):
+        i = i + 1
+        narr = parr[i].split('\\')
+        if  len(narr)>3:
               painter = narr[2]
               name = painter.split('-')
               #painterarr.append(painter)
@@ -68,6 +49,27 @@ def ranfile(parr,outhtml,thtml):
                
               #print imgstr
               instr = instr+imgstr
+    return instr
+
+
+def ranfile(parr,outhtml,thtml):
+    
+    fout = open(outhtml,'w')
+    
+    fhtml = open(thtml,'r')
+    htmlstr = fhtml.read()
+    sgg = '<ul class="gamma-gallery">'
+    tlen = len(sgg)
+    mark = htmlstr.find(sgg)+tlen
+    instr = ""
+    outstr = ""
+    #read  template file
+    i = 0
+    plen = len(parr)
+    instr = getInstr(0,1,parr)
+    
+
+    
 
 #outstr = '"<div id="gallery" style="display:none;">'+instr+'</div>'
 #print mark
@@ -75,8 +77,14 @@ def ranfile(parr,outhtml,thtml):
     sgg2 = "items = ['"
     tlen2 =len(sgg2)
     mark2 = outstr.find(sgg2)+tlen2
+    instr2 = getInstr(1,2,parr)
+
+
     outstr = outstr[:mark2]+instr+outstr[mark2:]
 
+    ftemp =  "t-00.html"
+    fem = open(ftemp,"w")
+    fem.write("<html><ul>"+instr+"2\n"+instr2+"</ul></html>")
     #sgg3 = "</header>"
     #tlen3 =len(sgg3)
     #mark3 = outstr.find(sgg3)+tlen3
@@ -101,7 +109,7 @@ now =  datetime.datetime.now()
 timestr = str(now).replace(' ','-').replace(':','-')
 #print now
 print timestr[0:16]
-listf = ".\index-load-00"+'.html'
+listf = ".\index-load-01"+'.html'
 thtml = "gg-01.html"
 ranfile(parr,listf,thtml)
 
