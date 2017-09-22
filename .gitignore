@@ -1,5 +1,5 @@
 *.jpg
 *.png
-\node_modules
-\test-infinite
-\test-masonry/*
+/node_modules
+/test-infinite
+/test-masonry

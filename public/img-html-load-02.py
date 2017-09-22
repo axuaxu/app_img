@@ -68,7 +68,7 @@ def ranfile(parr,outhtml,thtml):
     #read  template file
     i = 0
     plen = len(parr)
-    instr = getInstr(0,15,parr)
+    instr = getInstr(0,19,parr)
     
 
     
@@ -79,14 +79,14 @@ def ranfile(parr,outhtml,thtml):
     sgg2 = "items = ['"
     tlen2 =len(sgg2)
     mark2 = outstr.find(sgg2)+tlen2
-    instr2 = getInstr(30,42,parr)
+    instr2 = getInstr(20,39,parr)
 
 
     outstr = outstr[:mark2]+instr2+outstr[mark2:]
 
-    ftemp =  "t-00.html"
-    fem = open(ftemp,"w")
-    fem.write("<html><ul>"+instr2+"2\n"+instr2+"</ul></html>")
+    #ftemp =  "t-00.html"
+    #fem = open(ftemp,"w")
+    #fem.write("<html><ul>"+instr2+"2\n"+instr2+"</ul></html>")
     #sgg3 = "</header>"
     #tlen3 =len(sgg3)
     #mark3 = outstr.find(sgg3)+tlen3
@@ -110,10 +110,10 @@ parr = sorted(parr)
 now =  datetime.datetime.now()
 timestr = str(now).replace(' ','-').replace(':','-')
 #print now
-listf = ".\index-load-08"+'.html'
+listf = ".\iz5.html"
 print timestr[0:19]
 print listf
-thtml = "gg-10.html"
+thtml = "gg-15.html"
 ranfile(parr,listf,thtml)
 
 

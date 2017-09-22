@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		http://www.jqueryscript.net/loading/Easy-jQuery-AJAX-Infinite-Scroll-Plugin-Yofinity.html
+	</title>
+	<script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
+<script src="yofinity.js"></script>
+</head>
+<body>
+<a href="page2.html" title="More Content" rel="next">Loading...</a>
+$('body').yofinity({
+  success: function ($link, response){
+    $link.before(response);
+    $link.attr('href', 'page2.html');
+  }
+});
+$('body').yofinity({
+
+  // Ajax custom URL to specify if no next button is available (Usefull for WordPress sites with ajax call functions)
+  ajaxUrl: '',
+
+  // Number of pixels to fire infinite scroll
+  buffer: 1000,
+
+  // container
+  context: window,
+
+  // debug mode
+  debug: false,
+
+  // Function called if script fires an error
+  error: null,
+
+  // Function called when script fires loading
+  loading: null,
+
+  // Iterator may be used for pagination, define where to start. 
+  // After each success call, the iterator is autoincremented
+  iterator: 1,
+
+  // Load more selector
+  navSelector: 'a[rel="next"]',
+
+  // Method to send data with
+  type: 'get',
+  
+  // Parameters to send in POST or GET method
+  params: {},
+
+  // Function called when script fires success
+  success: null
+  
+});
+</body>
+</html>

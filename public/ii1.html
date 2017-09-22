@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+		<meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+		<script src="js/modernizr.custom.70736.js"></script>
+		<noscript><link rel="stylesheet" type="text/css" href="css/noJS.css"/></noscript>
+		<!--[if lte IE 7]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
+		<link rel="stylesheet" href="css/infinite-scroll-docs.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+         
+    </head>
+    <body>
+        <div class="container">
+		
+			
+			<div class="main">
+				<header class="clearfix">
+				
+					<h1>Gamma Gallery<span>A responsive image gallery experiment</span></h1>
+
+					<div class="support-note">
+						<span class="note-ie">Sorry, only modern browsers.</span>
+					</div>
+					
+				</header>
+				
+				<div class="gamma-container gamma-loading" id="gamma-container">
+
+					<ul class="gamma-gallery"><li><div  data-alt="images/a-y-jackson/early-spring-quebec-1923.jpg" data-description="<h3>A Y Jackson Early Spring Quebec 1923</h3>" data-max-width="1800" data-max-height="1350"><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg" data-min-width="1300"></div><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg" data-min-width="1000"></div><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg" data-min-width="700"></div><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg" data-min-width="300"></div><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg" data-min-width="200"></div><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg" data-min-width="140"></div><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg"></div><div data-src="images/a-y-jackson/early-spring-quebec-1923.jpg"></div><noscript><img src="images/a-y-jackson/early-spring-quebec-1923.jpg" alt="img03"/></noscript></div></li>
+  
+					</ul>
+
+					
+
+					
+
+				</div>
+            <div class="scroller-status">
+      <div class="loader-ellips infinite-scroll-request">
+        <span class="loader-ellips__dot"></span>
+        <span class="loader-ellips__dot"></span>
+        <span class="loader-ellips__dot"></span>
+        <span class="loader-ellips__dot"></span>
+      </div>
+      <p class="scroller-status__message infinite-scroll-last">End of content</p>
+      <p class="scroller-status__message infinite-scroll-error">No more pages to load</p>
+    </div>
+
+      <p class="pagination" style="display: none;">
+        <a class="pagination__next" href="http://localhost:3000/ii2.html">Next page</a>
+      </p>
+
+			</div><!--/main-->
+		</div>
+		
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src="js/jquery.masonry.min.js"></script>
+		<script src="js/jquery.history.js"></script>
+		<script src="js/js-url.min.js"></script>
+		<script src="js/jquerypp.custom.js"></script>
+		<script src="js/gamma.js"></script>
+		<script type="text/javascript">
+			
+			$(function() {
+
+				var GammaSettings = {
+						// order is important!
+						viewport : [ {
+							width : 1200,
+							columns : 5
+						}, {
+							width : 900,
+							columns : 4
+						}, {
+							width : 500,
+							columns : 3
+						}, { 
+							width : 320,
+							columns : 2
+						}, { 
+							width : 0,
+							columns : 2
+						} ]
+				};
+
+				Gamma.init( GammaSettings, fncallback );
+
+
+				// Example how to add more items (just a dummy):
+
+				var page = 0,
+					items = ['']
+
+				function fncallback() {
+			
+				}
+
+			});
+
+		</script>	
+		 <script src="js/infinite-scroll-docs.min.js.download"></script>
+
+  <script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','UA-58739927-7','auto');ga('send','pageview')
+  </script>
+  <script src="js/analytics.js.download" async="" defer=""></script>
+
+	</body>
+</html>
